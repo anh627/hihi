@@ -344,3 +344,96 @@ document.addEventListener('visibilitychange', function() {
         });
     }
 });
+// Simple Modal Handler - Guaranteed to work
+function openModal(element) {
+    // Lấy modal
+    const modal = document.getElementById('phetModal');
+    const iframe = document.getElementById('modalIframe');
+    const title = document.getElementById('modalTitle');
+    
+    // Lấy data từ element được click
+    let url, simTitle;
+    
+    // Nếu click vào card
+    if (element.classList.contains('sim-card')) {
+        url = element.dataset.url;
+        simTitle = element.dataset.title;
+    }
+    // Nếu click vào nút expand
+    else {
+        const card = element.closest('.sim-card');
+        url = card.dataset.url;
+        simTitle = card.dataset.title;
+    }
+    
+    // Set nội dung
+    if (url) {
+        iframe.src = url;
+        title.textContent = simTitle || 'Mô phỏng';
+        
+        // Hiển thị modal
+        modal.classList.add('active');
+        
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Close Modal - Simple
+function closeModal() {
+    const modal = document.getElementById('phetModal');
+    const iframe = document.getElementById('modalIframe');
+    
+    // Ẩn modal
+    modal.classList.remove('active');
+    
+    // Clear iframe
+    iframe.src = '';
+    
+    // Re-enable body scroll
+    document.body.style.overflow = '';
+}
+
+// Khi DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Click handler cho cards
+    const cards = document.querySelectorAll('.sim-card');
+    cards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Nếu không phải click vào nút expand
+            if (!e.target.closest('.expand-btn')) {
+                openModal(this);
+            }
+        });
+    });
+    
+    // Click handler cho expand buttons
+    const expandBtns = document.querySelectorAll('.expand-btn');
+    expandBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            openModal(this);
+        });
+    });
+    
+    // Click outside để đóng
+    const modal = document.getElementById('phetModal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            // Nếu click vào background (không phải content)
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+    
+    // ESC key để đóng
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+});
+
+// Đảm bảo closeModal là global function
+window.closeModal = closeModal;
