@@ -1,17 +1,18 @@
 /* ============================================
-   VUI HỌC STEM - VERSION 7.1 FINAL
-   Fixed: Modal không lấn sidebar, không trùng close/toggle
+   VUI HỌC STEM - PERFECT EDITION
+   Version: 6.0 - Final Ultimate + ANIMATED ICONS
    ============================================ */
 
 /* ============================================
-   1. IMPORTS & FONTS
+   1. IMPORTS & FONTS - FIXED
    ============================================ */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css');
 
 /* ============================================
-   2. CSS VARIABLES
+   2. CSS VARIABLES - ENHANCED
    ============================================ */
 :root {
     /* Vibrant Primary Colors */
@@ -25,7 +26,7 @@
     --danger: #EF4444;
     --info: #3B82F6;
     --highlight: #FFD700;
-   
+    
     /* Rich Gradients */
     --gradient-primary: linear-gradient(135deg, #5B5FDE 0%, #9333EA 100%);
     --gradient-vibrant: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
@@ -34,10 +35,12 @@
     --gradient-fire: linear-gradient(135deg, #F857A6 0%, #FF5858 100%);
     --gradient-nature: linear-gradient(135deg, #00B09B 0%, #96C93D 100%);
     --gradient-cosmic: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%);
-   
+    
     /* Animated Background Gradient */
     --gradient-animated-bg: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-   
+    --gradient-animated-bg2: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+    --gradient-animated-bg3: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #fda085 100%);
+    
     /* Neutrals */
     --white: #FFFFFF;
     --gray-50: #F9FAFB;
@@ -51,29 +54,18 @@
     --gray-800: #1F2937;
     --gray-900: #111827;
     --black: #000000;
-   
-    /* Typography */
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    
+    /* Typography - Fixed Fonts */
+    --font-primary: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-heading: 'Poppins', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-mono: 'Fira Code', 'Courier New', monospace;
-   
-    /* Layout */
-    --sidebar-width: 280px;
+    
+    /* Layout - ADJUSTED */
+    --sidebar-width: 280px; /* Giảm từ 320px */
     --header-height: 80px;
     --content-max-width: 1400px;
-    --content-padding: 2rem;
-   
-    /* Z-index hierarchy - OPTIMIZED */
-    --z-base: 1;
-    --z-particles: 2;
-    --z-floating-icons: 3;
-    --z-content: 10;
-    --z-sidebar-overlay: 9997;
-    --z-sidebar: 9998;
-    --z-menu-toggle: 9999;
-    --z-modal: 10000;
-    --z-modal-close: 10001;
-   
+    --content-padding: 2rem; /* Thêm padding cho nội dung */
+    
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
@@ -81,7 +73,7 @@
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
     --spacing-2xl: 4rem;
-   
+    
     /* Border Radius */
     --radius-sm: 0.5rem;
     --radius-md: 0.75rem;
@@ -89,8 +81,8 @@
     --radius-xl: 1.5rem;
     --radius-2xl: 2rem;
     --radius-full: 9999px;
-   
-    /* Shadows */
+    
+    /* Enhanced Shadows */
     --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -99,7 +91,7 @@
     --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     --shadow-colored: 0 10px 40px rgba(91, 95, 222, 0.2);
     --shadow-glow: 0 0 30px rgba(91, 95, 222, 0.4);
-   
+    
     /* Transitions */
     --transition-fast: all 0.2s ease;
     --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -139,18 +131,15 @@ body {
     overflow-x: hidden;
 }
 
-/* Prevent scroll when menu/modal is open */
-body.menu-open,
-body.modal-open {
-    overflow: hidden;
+/* Preload state */
+body.is-preload *,
+body.is-preload *:before,
+body.is-preload *:after {
+    animation: none !important;
+    transition: none !important;
 }
 
-/* Hide menu toggle when modal is open - ENHANCED */
-body.modal-open .menu-toggle,
-body:has(.phet-modal.active) .menu-toggle {
-    display: none !important;
-}
-
+/* Links */
 a {
     text-decoration: none;
     color: var(--primary);
@@ -168,16 +157,17 @@ img {
 }
 
 /* ============================================
-   4. TYPOGRAPHY
+   4. TYPOGRAPHY - FIXED FONTS + BETTER CONTRAST
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.3;
-    color: var(--white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--white); /* Đổi sang màu trắng */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Thêm shadow */
     margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
+    /* Fix font rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -185,21 +175,26 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 900;
-    background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%);
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%); /* Gradient trắng-vàng */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4)); /* Tăng shadow */
+    position: relative;
+    /* Ensure font loads properly */
+    font-family: 'Poppins', 'Inter', 'Roboto', sans-serif !important;
 }
 
-h2 {
+h2 { 
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 800;
+    font-family: 'Poppins', 'Inter', 'Roboto', sans-serif !important;
 }
 
-h3 {
+h3 { 
     font-size: clamp(1.5rem, 3vw, 1.875rem);
     font-weight: 700;
+    font-family: 'Poppins', 'Inter', 'Roboto', sans-serif !important;
 }
 
 h4 { font-size: 1.5rem; font-weight: 600; }
@@ -208,18 +203,19 @@ h6 { font-size: 1rem; font-weight: 600; }
 
 p {
     margin-bottom: 1.5rem;
-    color: var(--white);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    color: var(--white); /* Đổi sang màu trắng */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Thêm shadow */
 }
 
 strong, b {
-    color: var(--highlight);
+    color: var(--highlight); /* Đổi sang màu vàng */
     font-weight: 600;
+    font-family: inherit;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* ============================================
-   5. LAYOUT
+   5. LAYOUT - EXTENDED SIDEBAR
    ============================================ */
 #wrapper {
     display: flex;
@@ -228,7 +224,10 @@ strong, b {
 }
 
 /* ============================================
-   6. SIDEBAR
+   6. SIDEBAR - EXTENDED TO FULL HEIGHT
+   ============================================ */
+/* ============================================
+   6. SIDEBAR - SINGLE COLOR UNIFIED DESIGN
    ============================================ */
 #sidebar {
     position: fixed;
@@ -236,10 +235,22 @@ strong, b {
     top: 0;
     width: var(--sidebar-width);
     height: 100vh;
-    background: #1e2139;
+    background: #1e2139; /* Màu xanh đen sang trọng */
     box-shadow: 5px 0 30px rgba(0, 0, 0, 0.15);
     overflow-y: auto;
-    z-index: var(--z-sidebar);
+    z-index: 1000;
+}
+
+/* Extend sidebar background to full document height */
+#sidebar::after {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 100vh;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: #1e2139; /* Cùng màu để thống nhất */
+    z-index: -1;
 }
 
 #sidebar .inner {
@@ -250,7 +261,20 @@ strong, b {
     flex-direction: column;
 }
 
-/* Search Box */
+#sidebar .inner::-webkit-scrollbar {
+    width: 6px;
+}
+
+#sidebar .inner::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+#sidebar .inner::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+/* Search Box - Enhanced */
 #search {
     margin-bottom: 2rem;
 }
@@ -262,7 +286,7 @@ strong, b {
 #search input[type="text"] {
     width: 100%;
     padding: 1rem 3rem 1rem 1.2rem;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08); /* Điều chỉnh độ trong suốt cho phù hợp */
     border: 2px solid rgba(255, 255, 255, 0.12);
     border-radius: var(--radius-lg);
     color: var(--white);
@@ -286,18 +310,15 @@ strong, b {
     content: '\f002';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
-    font-style: normal;
     position: absolute;
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     color: rgba(255, 255, 255, 0.6);
     pointer-events: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-/* Menu */
+/* Menu - FULLY FUNCTIONAL */
 #menu {
     margin-bottom: 2rem;
     flex: 1;
@@ -319,6 +340,7 @@ strong, b {
     font-weight: 600;
 }
 
+/* Main menu items */
 #menu > ul {
     list-style: none;
     padding: 0;
@@ -347,9 +369,14 @@ strong, b {
 
 #menu > ul > li > a:hover,
 #menu > ul > li > .opener:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08); /* Hover nhẹ nhàng */
     color: var(--highlight);
     padding-left: 1.5rem;
+}
+
+/* Opener arrow */
+#menu .opener {
+    user-select: none;
 }
 
 #menu .opener::after {
@@ -366,6 +393,7 @@ strong, b {
     color: var(--highlight);
 }
 
+/* Submenu - VISIBLE AND FUNCTIONAL */
 #menu ul ul {
     list-style: none;
     padding: 0;
@@ -377,6 +405,10 @@ strong, b {
 
 #menu > ul > li.active > ul {
     max-height: 500px;
+}
+
+#menu ul ul li {
+    margin-bottom: 0.2rem;
 }
 
 #menu ul ul li a {
@@ -409,7 +441,7 @@ strong, b {
     opacity: 1;
 }
 
-/* Contact Section */
+/* Contact Section - WHITE TEXT */
 #sidebar > .inner > section:last-of-type {
     margin-top: auto;
     padding-top: 2rem;
@@ -417,7 +449,7 @@ strong, b {
 }
 
 #sidebar section header.major h2 {
-    color: var(--white);
+    color: var(--white) !important;
     font-size: 1.1rem;
     font-family: var(--font-heading);
     text-transform: uppercase;
@@ -427,7 +459,7 @@ strong, b {
 }
 
 #sidebar section p {
-    color: var(--white);
+    color: var(--white) !important;
     font-size: 0.95rem;
     margin-bottom: 1rem;
 }
@@ -447,7 +479,7 @@ strong, b {
     background: rgba(255, 255, 255, 0.05);
     border-radius: var(--radius-md);
     transition: var(--transition-base);
-    color: var(--white);
+    color: var(--white) !important;
 }
 
 .contact li:hover {
@@ -469,13 +501,13 @@ strong, b {
 }
 
 .contact li a {
-    color: var(--white);
+    color: var(--white) !important;
     font-size: 0.9rem;
     font-family: var(--font-primary);
 }
 
 .contact li a:hover {
-    color: var(--highlight);
+    color: var(--highlight) !important;
 }
 
 /* Footer */
@@ -491,30 +523,36 @@ strong, b {
     font-size: 0.85rem;
     font-family: var(--font-primary);
 }
-
 /* ============================================
-   7. MAIN CONTENT - OPTIMIZED
+   7. MAIN CONTENT - OPTIMIZED GRADIENT BG
    ============================================ */
 #main {
     margin-left: var(--sidebar-width);
-    padding: 2rem 3rem;
+padding: 2rem 3rem;
     flex: 1;
     min-height: 100vh;
     position: relative;
+    /* Giữ gradient chính, tối ưu animation */
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
     background-size: 400% 400%;
-    animation: gradientShift 25s ease infinite;
+    animation: gradientShift 25s ease infinite; /* Chậm hơn để tối ưu */
     overflow: hidden;
-    width: calc(100% - var(--sidebar-width));
-    z-index: var(--z-base);
 }
 
+/* Primary gradient animation - TỐI ƯU */
 @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
+/* Giảm bớt overlay - CHỈ GIỮ 1 LỚP */
 #main::before {
     content: '';
     position: absolute;
@@ -522,17 +560,22 @@ strong, b {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.1); /* Overlay tối nhẹ để tăng contrast */
     pointer-events: none;
     z-index: 1;
 }
 
+/* Bỏ lớp ::after để tối ưu */
+
+/* Tất cả content có z-index cao hơn */
 #main > * {
     position: relative;
-    z-index: var(--z-content);
+    z-index: 10;
 }
 
-/* Floating Icons - FIXED Z-INDEX */
+/* ============================================
+   FLOATING ICONS - GIỮ NGUYÊN NHƯNG TỐI ƯU
+   ============================================ */
 .floating-icons {
     position: fixed;
     top: 0;
@@ -541,20 +584,19 @@ strong, b {
     bottom: 0;
     overflow: hidden;
     pointer-events: none;
-    z-index: var(--z-floating-icons);
+    z-index: 5;
 }
 
 .floating-icon {
     position: absolute;
     font-size: 3rem;
-    opacity: 0.25;
-    color: rgba(255, 255, 255, 0.9);
-    animation: floatIcon 30s ease-in-out infinite;
+    opacity: 0.25; /* Tăng opacity */
+    color: rgba(255, 255, 255, 0.9); /* Màu trắng */
+    animation: floatIcon 30s ease-in-out infinite; /* Chậm hơn */
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-    will-change: transform;
-    transform: translateZ(0);
 }
 
+/* Tối ưu animation */
 @keyframes floatIcon {
     0%, 100% {
         transform: translateY(0) translateX(0) rotate(0deg);
@@ -566,19 +608,87 @@ strong, b {
     }
 }
 
-.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: 35s; }
-.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: 40s; }
-.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: 38s; }
-.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: 32s; }
-.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: 36s; }
+/* Giữ nguyên vị trí icons */
+.floating-icon:nth-child(1) {
+    top: 10%;
+    left: 15%;
+    animation-delay: 0s;
+    animation-duration: 35s;
+}
 
+.floating-icon:nth-child(2) {
+    top: 60%;
+    left: 80%;
+    animation-delay: -5s;
+    animation-duration: 40s;
+}
+
+.floating-icon:nth-child(3) {
+    top: 30%;
+    left: 70%;
+    animation-delay: -10s;
+    animation-duration: 38s;
+}
+
+.floating-icon:nth-child(4) {
+    top: 80%;
+    left: 20%;
+    animation-delay: -15s;
+    animation-duration: 32s;
+}
+
+.floating-icon:nth-child(5) {
+    top: 50%;
+    left: 10%;
+    animation-delay: -20s;
+    animation-duration: 36s;
+}
+
+.floating-icon:nth-child(6) {
+    top: 20%;
+    left: 50%;
+    animation-delay: -8s;
+    animation-duration: 34s;
+}
+
+.floating-icon:nth-child(7) {
+    top: 70%;
+    left: 60%;
+    animation-delay: -12s;
+    animation-duration: 37s;
+}
+
+.floating-icon:nth-child(8) {
+    top: 40%;
+    left: 85%;
+    animation-delay: -18s;
+    animation-duration: 33s;
+}
+
+.floating-icon:nth-child(9) {
+    top: 15%;
+    left: 35%;
+    animation-delay: -3s;
+    animation-duration: 39s;
+}
+
+.floating-icon:nth-child(10) {
+    top: 85%;
+    left: 75%;
+    animation-delay: -7s;
+    animation-duration: 31s;
+}
+
+/* Icon colors - Sáng hơn */
 .floating-icon.math { color: #FFFFFF; }
 .floating-icon.science { color: #FFD700; }
 .floating-icon.tech { color: #FFFFFF; }
 .floating-icon.engineering { color: #FFD700; }
 .floating-icon.creative { color: #FFFFFF; }
 
-/* Particles - FIXED Z-INDEX */
+/* ============================================
+   THÊM PARTICLE EFFECTS - TỐI ƯU
+   ============================================ */
 .particles {
     position: fixed;
     top: 0;
@@ -586,7 +696,7 @@ strong, b {
     right: 0;
     bottom: 0;
     pointer-events: none;
-    z-index: var(--z-particles);
+    z-index: 4;
 }
 
 .particle {
@@ -596,9 +706,7 @@ strong, b {
     background: white;
     border-radius: 50%;
     opacity: 0.6;
-    animation: particleFloat 25s linear infinite;
-    will-change: transform;
-    transform: translateZ(0);
+    animation: particleFloat 25s linear infinite; /* Chậm hơn */
 }
 
 @keyframes particleFloat {
@@ -606,27 +714,26 @@ strong, b {
         transform: translateY(100vh) rotate(0deg);
         opacity: 0;
     }
-    10% { opacity: 0.6; }
-    90% { opacity: 0.6; }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
     to {
         transform: translateY(-100vh) rotate(360deg);
         opacity: 0;
     }
 }
 
+/* Giảm số particles */
 .particle:nth-child(1) { left: 10%; animation-duration: 25s; animation-delay: 0s; }
 .particle:nth-child(2) { left: 30%; animation-duration: 28s; animation-delay: 5s; }
 .particle:nth-child(3) { left: 50%; animation-duration: 30s; animation-delay: 10s; }
 .particle:nth-child(4) { left: 70%; animation-duration: 27s; animation-delay: 15s; }
 .particle:nth-child(5) { left: 90%; animation-duration: 29s; animation-delay: 20s; }
 
-/* Reduce animations on touch devices */
-@media (pointer: coarse) {
-    .floating-icon:nth-child(n+4) { display: none; }
-    .particle:nth-child(n+4) { display: none; }
-}
-
-/* Header */
+/* Header - Enhanced */
 #header {
     display: flex;
     align-items: center;
@@ -656,7 +763,7 @@ strong, b {
 #header .logo {
     font-size: 2rem;
     font-weight: 900;
-    font-family: var(--font-heading);
+    font-family: 'Poppins', 'Inter', sans-serif !important;
 }
 
 #header .logo strong {
@@ -665,9 +772,10 @@ strong, b {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
+    font-family: 'Poppins', 'Inter', sans-serif !important;
 }
 
-/* Banner */
+/* Banner - Glass morphism để tăng contrast */
 #banner {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -675,7 +783,10 @@ strong, b {
     align-items: center;
     padding: 2.5rem;
     margin-bottom: 3rem;
-    background: rgba(30, 33, 57, 0.95);
+    /* Glass effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-2xl);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
@@ -683,43 +794,39 @@ strong, b {
     overflow: hidden;
 }
 
-@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
-    #banner {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-    }
-}
-
-#banner::before,
-#banner::after {
+/* Giữ nguyên animated elements nhưng giảm opacity */
+#banner::before {
     content: '';
     position: absolute;
-    border-radius: 50%;
-    animation: float 20s ease-in-out infinite;
-}
-
-#banner::before {
     top: -50%;
     right: -10%;
     width: 60%;
     height: 200%;
     background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+    animation: float 20s ease-in-out infinite;
 }
 
 #banner::after {
+    content: '';
+    position: absolute;
     bottom: -30%;
     left: -10%;
     width: 40%;
     height: 150%;
     background: radial-gradient(circle, rgba(91, 95, 222, 0.1) 0%, transparent 70%);
-    animation-direction: reverse;
+    animation: float 25s ease-in-out infinite reverse;
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    33% { transform: translateY(-30px) rotate(120deg) scale(1.1); }
-    66% { transform: translateY(20px) rotate(240deg) scale(0.9); }
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    33% {
+        transform: translateY(-30px) rotate(120deg) scale(1.1);
+    }
+    66% {
+        transform: translateY(20px) rotate(240deg) scale(0.9);
+    }
 }
 
 #banner .content {
@@ -727,18 +834,25 @@ strong, b {
     z-index: 2;
 }
 
+/* Fixed font for banner title */
 #banner .content header h1 {
     font-size: 3.5rem;
     line-height: 1.2;
     margin-bottom: 1rem;
-    font-family: var(--font-heading);
-    font-weight: 900;
+    position: relative;
+    font-family: 'Poppins', 'Inter', 'Roboto', sans-serif !important;
+    font-weight: 900 !important;
     animation: titleGlow 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
 }
 
 @keyframes titleGlow {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)); }
-    50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)); }
+    0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+    }
+    50% { 
+        filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8));
+    }
 }
 
 #banner .content header h1 strong {
@@ -747,14 +861,24 @@ strong, b {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
+    font-family: 'Poppins', 'Inter', 'Roboto', sans-serif !important;
+    font-weight: 900 !important;
     animation: colorShift 5s ease-in-out infinite;
 }
 
 @keyframes colorShift {
-    0%, 100% { filter: hue-rotate(0deg) brightness(1.2); }
-    25% { filter: hue-rotate(45deg) brightness(1.3); }
-    50% { filter: hue-rotate(90deg) brightness(1.4); }
-    75% { filter: hue-rotate(-45deg) brightness(1.3); }
+    0%, 100% { 
+        filter: hue-rotate(0deg) brightness(1.2);
+    }
+    25% { 
+        filter: hue-rotate(45deg) brightness(1.3);
+    }
+    50% { 
+        filter: hue-rotate(90deg) brightness(1.4);
+    }
+    75% { 
+        filter: hue-rotate(-45deg) brightness(1.3);
+    }
 }
 
 #banner .content header p {
@@ -762,7 +886,7 @@ strong, b {
     color: var(--highlight);
     font-weight: 600;
     margin-bottom: 2rem;
-    font-family: var(--font-heading);
+    font-family: 'Poppins', 'Inter', sans-serif !important;
     animation: fadeInUp 1s ease 0.3s both;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -774,17 +898,6 @@ strong, b {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     font-family: var(--font-primary);
     animation: fadeInUp 1s ease 0.5s both;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 #banner .image.object {
@@ -812,7 +925,7 @@ strong, b {
     transform: scale(1.1);
 }
 
-/* Features Section */
+/* Features Section - Glass Cards */
 section header.major {
     text-align: center;
     margin-bottom: 4rem;
@@ -826,8 +939,8 @@ section header.major h2 {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
-    font-family: var(--font-heading);
-    font-weight: 800;
+    font-family: 'Poppins', 'Inter', 'Roboto', sans-serif !important;
+    font-weight: 800 !important;
 }
 
 .features {
@@ -839,21 +952,16 @@ section header.major h2 {
 
 .features article {
     padding: 2.5rem;
-    background: rgba(30, 33, 57, 0.9);
+    /* Glass morphism */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-xl);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition-spring);
     position: relative;
     overflow: hidden;
-}
-
-@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
-    .features article {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-    }
 }
 
 .features article::before {
@@ -878,11 +986,10 @@ section header.major h2 {
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* Animated icons in features */
 .features article .icon {
     width: 70px;
     height: 70px;
-    min-width: 70px;
-    min-height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -890,6 +997,7 @@ section header.major h2 {
     color: var(--white);
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
+    position: relative;
     animation: iconPulse 3s ease-in-out infinite;
 }
 
@@ -915,10 +1023,19 @@ section header.major h2 {
     75% { transform: scale(1.1) rotate(-3deg); }
 }
 
-.features article:nth-child(1) .icon { background: var(--gradient-fire); }
-.features article:nth-child(2) .icon { background: var(--gradient-ocean); }
-.features article:nth-child(3) .icon { background: var(--gradient-nature); }
+.features article:nth-child(1) .icon {
+    background: var(--gradient-fire);
+}
 
+.features article:nth-child(2) .icon {
+    background: var(--gradient-ocean);
+}
+
+.features article:nth-child(3) .icon {
+    background: var(--gradient-nature);
+}
+
+/* Icon rotation on hover */
 .features article:hover .icon i {
     animation: iconRotate 0.8s ease;
 }
@@ -933,8 +1050,8 @@ section header.major h2 {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     margin-bottom: 1rem;
     font-size: 1.4rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
+    font-family: 'Poppins', 'Inter', sans-serif !important;
+    font-weight: 700 !important;
 }
 
 .features article .content p {
@@ -945,7 +1062,25 @@ section header.major h2 {
     font-family: var(--font-primary);
 }
 
-/* Posts Section */
+/* Mini Games Section - With Fixed Title Font */
+section:has(.posts) {
+    position: relative;
+}
+
+section:has(.posts) header.major h2 {
+    position: relative;
+    padding-left: 3rem;
+    font-family: 'Poppins', 'Inter', 'Roboto', sans-serif !important;
+    font-weight: 800 !important;
+}
+
+
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
 .posts {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -954,21 +1089,16 @@ section header.major h2 {
 }
 
 .posts article {
-    background: rgba(30, 33, 57, 0.9);
+    /* Glass morphism */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition-spring);
     cursor: pointer;
-}
-
-@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
-    .posts article {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-    }
 }
 
 .posts article:hover {
@@ -1000,8 +1130,8 @@ section header.major h2 {
     color: var(--white);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     font-size: 1.3rem;
-    font-family: var(--font-heading);
-    font-weight: 700;
+    font-family: 'Poppins', 'Inter', sans-serif !important;
+    font-weight: 700 !important;
 }
 
 .posts article p {
@@ -1016,12 +1146,12 @@ section header.major h2 {
     padding: 1rem 1.5rem 1.5rem;
 }
 
-/* Buttons */
+/* Buttons - Enhanced */
 .button {
     display: inline-block;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    color: var(--white);
+    color: var(--white) !important;
     padding: 0.9rem 2.2rem;
     border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-full);
@@ -1035,7 +1165,6 @@ section header.major h2 {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-    cursor: pointer;
 }
 
 .button::before {
@@ -1061,9 +1190,9 @@ section header.major h2 {
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    color: var(--white);
 }
 
+/* Actions */
 ul.actions {
     list-style: none;
     display: flex;
@@ -1073,367 +1202,65 @@ ul.actions {
 }
 
 /* ============================================
-  /* ============================================
-   8. PHET SIMULATIONS - CARD LAYOUT
+   8. ANIMATIONS
    ============================================ */
-
-/* Lưới chứa các thẻ mô phỏng */
-.sim-grid {
-    display: grid;
-    /* Tạo các cột tự động, mỗi cột rộng tối thiểu 300px */
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem; /* Khoảng cách giữa các thẻ */
-    margin-bottom: 3rem;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Kiểu dáng cho mỗi thẻ mô phỏng (thay thế .simulation-item cũ) */
-.sim-card {
-    background: rgba(30, 33, 57, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-xl);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: var(--transition-spring);
-    overflow: hidden; /* Quan trọng để bo góc hình ảnh */
-    position: relative; /* Để định vị nút expand */
-    display: flex;
-    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
-}
-
-/* Hiệu ứng kính mờ (nếu trình duyệt hỗ trợ) */
-@supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
-    .sim-card {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Hiệu ứng khi di chuột vào thẻ */
-.sim-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Hình ảnh của thẻ */
-.sim-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover; /* Đảm bảo ảnh không bị méo */
-    transition: transform 0.4s ease;
-}
-
-.sim-card:hover img {
-    transform: scale(1.05); /* Hiệu ứng phóng to ảnh khi hover */
-}
-
-/* Tiêu đề thẻ (đã bỏ padding-left và ::before) */
-.sim-card h3 {
-    color: var(--white);
-    font-size: 1.3rem;
-    font-family: var(--font-heading);
-    margin: 0;
-    padding: 1rem 1.5rem 0.5rem; /* Canh lề cho tiêu đề */
-}
-
-/* Mô tả thẻ (đã bỏ padding-left) */
-.sim-card p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin: 0;
-    padding: 0 1.5rem 1.5rem;
-    flex-grow: 1; /* Giúp các thẻ có cùng chiều cao */
-}
-
-/* Nút mở rộng toàn màn hình */
-.expand-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 40px;
-    height: 40px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: var(--transition-base);
-    opacity: 0.7;
-}
-
-.sim-card:hover .expand-btn {
-    opacity: 1;
-    transform: scale(1.1);
-    background: var(--primary);
-}
-
-
 /* ============================================
-   9. FULLSCREEN MODAL - SIMPLIFIED
+   9. RESPONSIVE DESIGN
    ============================================ */
-.phet-modal {
-    display: none; /* Mặc định ẩn */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    backdrop-filter: blur(8px);
-    z-index: var(--z-modal);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    align-items: center;
-    justify-content: center;
-}
 
-/* Lớp .active sẽ được thêm bằng JS để hiện modal */
-.phet-modal.active {
-    display: flex;
-    opacity: 1;
-}
-
-.phet-modal-content {
-    position: relative;
-    width: 95%;
-    height: 95%;
-    max-width: 1600px;
-    background: #1e2139; /* Nền tối hơn */
-    border-radius: var(--radius-lg);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-    transform: scale(0.8);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
-}
-
-.phet-modal.active .phet-modal-content {
-    transform: scale(1); /* Hiệu ứng phóng to khi hiện ra */
-}
-
-.phet-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 0.5rem 0.8rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0; /* Header không co lại */
-}
-
-.phet-modal-title {
-    color: var(--white);
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-/* Nút đóng modal (cho cả desktop và mobile) */
-/* 🌟 Nút đóng ở góc trên (chỉ hiện trên desktop) */
-.phet-modal-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 1.6rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  line-height: 1;
-  transition: color 0.25s ease, transform 0.25s ease;
-  z-index: 10;
-}
-
-.phet-modal-close:hover {
-  color: #fff;
-  transform: scale(1.2) rotate(90deg);
-}
-
-/* 🌙 Nút đóng có chữ ở dưới (chỉ hiện trên mobile) */
-.bottom-close {
-  display: none; /* Ẩn mặc định */
-  position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
-  font-size: 1rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 30px;
-  cursor: pointer;
-  opacity: 0.9;
-  transition: background 0.3s ease, transform 0.25s ease;
-}
-
-.bottom-close:hover {
-  background: var(--primary, #007bff);
-  transform: translateX(-50%) scale(1.05);
-  opacity: 1;
-}
-
-.bottom-close i {
-  font-size: 1.2rem;
-}
-
-.bottom-close span {
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-
-/* 🎯 Nút “Đóng mô phỏng” chỉ hiện trên mobile */
-@media screen and (max-width: 768px) {
-  .phet-modal-close {
-    display: none; /* Ẩn nút X góc trên */
-  }
-
-  .bottom-close {
-    display: flex; /* Hiện nút đóng có chữ */
-  }
-}
-
-/* 🔳 Phần thân modal chứa iframe */
-.phet-modal-body {
-  flex-grow: 1;
-  margin-top: 1rem;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: #000;
-}
-
-.phet-modal-body iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-/* Gợi ý nhỏ */
-.phet-modal-hint {
-  text-align: center;
-  color: var(--gray-500);
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-/* 🖥️ Với desktop: modal không đè lên sidebar */
-@media screen and (min-width: 1025px) {
-  .phet-modal {
-    left: var(--sidebar-width);
-    width: calc(100% - var(--sidebar-width));
-  }
-}
-
-
-
-@media screen and (max-width: 768px) {
-  .phet-modal-content {
-    height: 85vh; /* Giới hạn 85% chiều cao màn hình */
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-  }
-
-  .phet-modal-body {
-    flex-grow: 1;
-    height: calc(100% - 60px); /* Chừa chỗ cho nút đóng phía dưới */
-    overflow: hidden;
-    border-radius: var(--radius-md);
-  }
-
-  .phet-modal-body iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  .bottom-close {
-    position: absolute;
-    bottom: 0.8rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-  }
-}
-
-/* ============================================
-   10. RESPONSIVE DESIGN
-   ============================================ */
 /* Tablet */
 @media screen and (max-width: 1024px) {
     :root {
         --sidebar-width: 260px;
         --content-padding: 1.5rem;
     }
-   
+    
     #main {
         padding: var(--content-padding);
-        width: calc(100% - var(--sidebar-width));
     }
-   
+    
     #banner {
         grid-template-columns: 1fr;
         padding: 3rem;
     }
-   
+    
     #banner .content header h1 {
         font-size: 2.5rem;
     }
-   
+    
     .features {
         grid-template-columns: repeat(2, 1fr);
     }
-   
+    
     .posts {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
-   
+    
+    /* Reduce floating icons on tablet */
     .floating-icon:nth-child(n+6) {
         display: none;
-    }
-    
-    /* Modal on tablet - full screen */
-    .phet-modal {
-        left: 0 !important;
-        width: 100% !important;
-    }
-    
-    .phet-modal-close {
-        display: none;
-    }
-    
-    .phet-modal-close-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .phet-modal-content {
-        width: 100%;
-        height: 100%;
-        border-radius: 0;
-        padding: 0;
-    }
-    
-    .phet-modal-body {
-        overflow: auto;
-        -webkit-overflow-scrolling: touch;
     }
 }
 
 /* Mobile */
 @media screen and (max-width: 768px) {
+    /* Sidebar mặc định ẩn và dùng inactive class */
     #sidebar {
         position: fixed;
         left: 0;
@@ -1442,18 +1269,20 @@ ul.actions {
         height: 100vh;
         transform: translateX(0);
         transition: transform 0.3s ease;
-        z-index: var(--z-sidebar);
+        z-index: 9998;
     }
-   
+    
+    /* Khi inactive (đóng menu) */
     #sidebar.inactive {
         transform: translateX(-100%);
     }
-   
+    
+    /* Mobile Menu Toggle */
     .menu-toggle {
         position: fixed;
         top: 1rem;
         right: 1rem;
-        z-index: var(--z-menu-toggle);
+        z-index: 9999;
         width: 50px;
         height: 50px;
         min-width: 50px;
@@ -1472,20 +1301,15 @@ ul.actions {
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
         user-select: none;
+        border: none;
+        outline: none;
     }
     
-    /* Safe area for menu toggle */
-    @supports (top: env(safe-area-inset-top)) {
-        .menu-toggle {
-            top: calc(1rem + env(safe-area-inset-top));
-            right: calc(1rem + env(safe-area-inset-right));
-        }
-    }
-   
     .menu-toggle:active {
         transform: scale(0.95);
     }
-   
+    
+    /* Overlay khi menu mở */
     .sidebar-overlay {
         position: fixed;
         top: 0;
@@ -1493,254 +1317,714 @@ ul.actions {
         right: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.5);
-        z-index: var(--z-sidebar-overlay);
+        z-index: 9997;
         display: none;
         opacity: 0;
         transition: opacity 0.3s ease;
-        pointer-events: none;
     }
-   
+    
     .sidebar-overlay.active {
         display: block;
         opacity: 1;
-        pointer-events: auto;
     }
-   
+    
+    /* Main content chiếm full width trên mobile */
     #main {
-        margin-left: 0;
-        padding: 1rem 1.5rem;
+        margin-left: 0 !important;
+        padding: 1rem 1.5rem !important;
         width: 100%;
         min-height: 100vh;
         position: relative;
     }
-   
+    
+    /* Đảm bảo wrapper chiếm full width */
     #wrapper {
         display: block;
         width: 100%;
         min-height: 100vh;
     }
-   
+    
+    /* Banner adjustments */
     #banner {
         padding: 2rem;
         width: 100%;
     }
-   
+    
     #banner .content header h1 {
         font-size: 2rem;
     }
-   
+    
+    /* Grid layouts */
     .features {
         grid-template-columns: 1fr;
     }
-   
+    
     .posts {
         grid-template-columns: 1fr;
     }
-   
+    
+    /* Hide most floating icons on mobile */
     .floating-icon:nth-child(n+4) {
         display: none;
     }
-   
+    
     .floating-icon {
         font-size: 2rem;
     }
-   
+    
+    /* Prevent horizontal scroll */
     body {
         overflow-x: hidden;
     }
-   
+    
+    /* Khi menu mở, prevent body scroll */
+    body.menu-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* Giảm animation trên mobile */
+    #main {
+        animation-duration: 30s;
+    }
+    
     .floating-icons {
         left: 0;
     }
-   
+    
     .particles {
         left: 0;
-    }
-    
-    /* PhET Simulation on mobile */
-    .phet-simulation {
-        padding-bottom: 75%;
-    }
-   
-    .simulation-item {
-        padding: 1.5rem;
-        margin-bottom: 2.5rem;
-    }
-   
-    .simulation-item h3 {
-        font-size: 1.3rem;
-        padding-left: 2rem;
-    }
-    
-    .simulation-item h3::before {
-        font-size: 1rem;
-    }
-   
-    .simulation-item p {
-        padding-left: 2rem;
-        font-size: 0.95rem;
-    }
-    
-    /* Modal on mobile */
-    .phet-modal-content {
-        width: 100%;
-        height: 100%;
-        max-width: none;
-        border-radius: 0;
-        padding: 0;
-    }
-    
-    .phet-modal-close {
-        display: none;
-    }
-    
-    .phet-modal-close-text {
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 }
 
 /* Small Mobile */
 @media screen and (max-width: 480px) {
     #sidebar {
-        width: 260px;
+        width: 260px; /* Sidebar nhỏ hơn trên màn hình nhỏ */
     }
-   
+    
     #main {
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 1rem !important;
     }
-   
+    
     #banner {
         padding: 1.5rem;
     }
-   
+    
     #banner .content header h1 {
         font-size: 1.5rem;
     }
-   
+    
     .features article {
         padding: 1.5rem;
     }
-   
+    
     .posts article {
         padding: 1rem;
     }
-   
+    
     .floating-icon {
         font-size: 1.5rem;
     }
-   
+    
     .menu-toggle {
         width: 45px;
         height: 45px;
         min-width: 45px;
         min-height: 45px;
     }
-    
-    .phet-modal-close-text {
-        max-width: 180px;
-        font-size: 1rem;
-        padding: 0.7rem 1.5rem;
-    }
 }
 
-/* Desktop - Ensure no overflow */
+/* Desktop - Đảm bảo không có menu toggle */
 @media screen and (min-width: 769px) {
     .menu-toggle {
         display: none !important;
     }
-   
+    
     .sidebar-overlay {
         display: none !important;
     }
-   
+    
     #sidebar {
         transform: translateX(0) !important;
         position: fixed;
     }
-   
+    
     #main {
         margin-left: var(--sidebar-width) !important;
-        width: calc(100% - var(--sidebar-width)) !important;
-    }
-    
-    .phet-modal-close-text {
-        display: none !important;
     }
 }
 
-/* Landscape mode on mobile */
+/* Fix cho landscape mode trên mobile */
 @media screen and (max-width: 768px) and (orientation: landscape) {
     #sidebar {
         width: 270px;
     }
-   
+    
     .menu-toggle {
         top: 0.5rem;
         right: 0.5rem;
     }
 }
-
 /* ============================================
-   11. PERFORMANCE OPTIMIZATIONS
+   PHET SIMULATIONS - GLASS MORPHISM STYLE
    ============================================ */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
+
+/* Container cho mỗi simulation */
+.simulation-item {
+    margin-bottom: 4rem;
+    padding: 2.5rem;
+    /* Glass morphism effect giống features */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: var(--transition-spring);
+    position: relative;
+    overflow: hidden;
 }
 
-/* ============================================
-   12. ACCESSIBILITY
-   ============================================ */
-button:focus-visible,
-a:focus-visible,
-.button:focus-visible {
-    outline: 3px solid var(--highlight);
-    outline-offset: 2px;
+/* Hover effect cho container */
+.simulation-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
 }
 
-.skip-to-content {
+/* Animated border top */
+.simulation-item::before {
+    content: '';
     position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--primary);
-    color: white;
-    padding: 8px;
-    text-decoration: none;
-    z-index: 100000;
-}
-
-.skip-to-content:focus {
     top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-vibrant);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ============================================
-   13. PRINT STYLES
-   ============================================ */
-@media print {
-    #sidebar,
-    .menu-toggle,
-    .floating-icons,
-    .particles {
-        display: none !important;
+.simulation-item:hover::before {
+    transform: scaleX(1);
+}
+
+/* Title styling - Phù hợp với theme */
+.simulation-item h3 {
+    color: var(--white) !important;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    font-family: var(--font-heading);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFD700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+    position: relative;
+    padding-left: 3rem;
+}
+
+
+@keyframes atomFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(180deg); }
+}
+
+/* Description text */
+.simulation-item p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    font-family: var(--font-primary);
+    padding-left: 3rem;
+}
+
+/* PhET iframe container */
+.phet-simulation {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 65%; /* Tỉ lệ 16:10 cho PhET */
+    margin: 1.5rem 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+                    0 0 30px rgba(102, 126, 234, 0.3);
     }
-    
-    #main {
-        margin-left: 0 !important;
-        width: 100% !important;
-        background: white !important;
-    }
-    
-    * {
-        color: black !important;
-        text-shadow: none !important;
-        background: transparent !important;
+    50% { 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+                    0 0 50px rgba(118, 75, 162, 0.5);
     }
 }
+
+/* PhET iframe */
+.phet-simulation iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--radius-lg);
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect cho iframe */
+.phet-simulation:hover iframe {
+    transform: scale(1.02);
+}
+
+/* Loading indicator */
+.phet-simulation::after {
+    content: 'Đang tải mô phỏng...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* Interactive badge */
+.simulation-item {
+    position: relative;
+}
+
+.simulation-item::after {
+    content: 'TƯƠNG TÁC';
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: var(--gradient-fire);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    animation: badgePulse 2s ease-in-out infinite;
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+@keyframes badgePulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+    }
+}
+
+/* Numbering cho simulation items */
+.simulation-item {
+    counter-increment: sim-counter;
+}
+
+.simulation-item h3::after {
+    content: counter(sim-counter, decimal-leading-zero);
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3rem;
+    font-weight: 900;
+    opacity: 0.1;
+    color: var(--white);
+}
+
+/* Reset counter */
+section:has(.simulation-item) {
+    counter-reset: sim-counter;
+}
+
+/* Button styling cập nhật */
+.simulation-item + ul.actions {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.simulation-item + ul.actions .button {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: var(--white) !important;
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.simulation-item + ul.actions .button::before {
+    content: '🚀';
+    position: absolute;
+    left: 1.5rem;
+    animation: rocketMove 2s ease-in-out infinite;
+}
+
+@keyframes rocketMove {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1024px) {
+    .phet-simulation {
+        padding-bottom: 70%;
+    }
+    
+    .simulation-item {
+        padding: 2rem;
+    }
+    
+    .simulation-item h3 {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .phet-simulation {
+        padding-bottom: 75%;
+    }
+    
+    .simulation-item {
+        padding: 1.5rem;
+        margin-bottom: 2.5rem;
+       position: relative;
+    }
+    
+    .simulation-item h3 {
+        font-size: 1.3rem;
+        padding-left: 2rem;
+    }
+    
+    .simulation-item p {
+        padding-left: 2rem;
+        font-size: 0.95rem;
+    }
+    
+    . .simulation-item::after {
+        content: 'TƯƠNG TÁC';
+        position: absolute;
+        bottom: 1rem;      /* 👈 DÍNH DƯỚI CÙNG */
+        right: 1rem;       /* 👈 VẪN GIỮ BÊN PHẢI */
+        top: auto;         /* 👈 GỠ BỎ TOP */
+        background: var(--gradient-fire);
+        color: white;
+        padding: 0.4rem 0.8rem; /* Thu nhỏ một chút cho mobile */
+        border-radius: var(--radius-full);
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        animation: badgePulse 2s ease-in-out infinite;
+        box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        z-index: 2; /* Đề phòng bị iframe đè */
+    }
+}
+
+/* Performance optimization */
+@media (prefers-reduced-motion: reduce) {
+    .simulation-item h3::before,
+    .phet-simulation,
+    .simulation-item::after {
+        animation: none;
+    }
+}
+
+/* Loading state */
+.phet-simulation.loading {
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.1) 25%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        rgba(255, 255, 255, 0.1) 75%);
+    background-size: 200% 100%;
+    animation: shimmerLoad 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmerLoad {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+/* ============================================
+   FULLSCREEN MODAL FOR PHET SIMULATIONS
+   ============================================ */
+
+/* Modal Overlay */
+.phet-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.phet-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+/* Modal Content Container */
+.phet-modal-content {
+    position: relative;
+    width: 95%;
+    height: 90%;
+    max-width: 1400px;
+    background: rgba(30, 33, 57, 0.98);
+    border-radius: var(--radius-xl);
+    padding: 1rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    transform: scale(0.7);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.phet-modal.active .phet-modal-content {
+    transform: scale(1);
+}
+
+/* Modal Header */
+.phet-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.phet-modal-title {
+    color: var(--white);
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Close Button */
+.phet-modal-close {
+    width: 45px;
+    height: 45px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-base);
+    position: relative;
+}
+
+.phet-modal-close:hover {
+    background: rgba(239, 68, 68, 0.8);
+    border-color: rgba(239, 68, 68, 1);
+    transform: rotate(90deg);
+}
+
+/* Modal Body - iframe container */
+.phet-modal-body {
+    width: 100%;
+    height: calc(100% - 70px);
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #000;
+}
+
+.phet-modal-body iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Expand Button on simulation */
+.expand-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-md);
+    color: var(--white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-base);
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.simulation-item:hover .expand-btn {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.expand-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+/* Tooltip cho expand button */
+.expand-btn::before {
+    content: 'Phóng to';
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.expand-btn:hover::before {
+    opacity: 1;
+}
+
+/* Loading spinner */
+.phet-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--white);
+    font-size: 3rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Keyboard shortcut hint */
+.phet-modal-hint {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.3rem 1rem;
+    border-radius: var(--radius-full);
+}
+
+/* Mobile responsive */
+@media screen and (max-width: 768px) {
+    .phet-modal-content {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        padding: 0;
+    }
+    
+    .phet-modal-header {
+        padding: 1rem;
+    }
+    
+    .phet-modal-body {
+        height: calc(100% - 60px);
+    }
+    
+    .expand-btn {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+/* Click hint overlay */
+.phet-simulation {
+    cursor: pointer;
+    position: relative;
+}
+
+.click-hint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+}
+
+.phet-simulation:hover .click-hint {
+    opacity: 1;
+}
+
+/* Overlay effect khi hover */
+.phet-simulation::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: var(--radius-lg);
+    pointer-events: none;
+}
+
+.phet-simulation:hover::before {
+    opacity: 1;
+}
+
 
 
 
