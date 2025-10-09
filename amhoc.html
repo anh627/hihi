@@ -51,21 +51,37 @@
                         </div>
                     </div>
                     <!-- Modal cho mô phỏng toàn màn hình -->
-                    <div class="phet-modal" id="phetModal">
-                        <div class="phet-modal-content">
-                            <div class="phet-modal-header">
-                                <span class="phet-modal-title" id="modalTitle"></span>
-                                <button class="phet-modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="phet-modal-body">
-                                <iframe id="modalIframe" src=""></iframe>
-                            </div>
-                            <button class="phet-modal-close bottom-close" onclick="closeModal()">
-                                    <i class="fas fa-times"></i>
-                                   <span>Đóng mô phỏng</span>
-                                    </button>
-                        </div>
-                    </div>
+                   <!-- Thay thế phần Modal hiển thị mô phỏng bằng code này -->
+<div class="phet-modal" id="phetModal">
+  <div class="phet-modal-content">
+    <!-- Swipe indicator cho mobile -->
+    <div class="modal-swipe-indicator"></div>
+    
+    <!-- Header modal -->
+    <div class="phet-modal-header">
+      <h3 class="phet-modal-title" id="modalTitle"></h3>
+      <button class="phet-modal-close" onclick="closeModal()" title="Đóng mô phỏng">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Nội dung -->
+    <div class="phet-modal-body">
+      <iframe id="modalIframe" src="" allowfullscreen></iframe>
+    </div>
+
+    <!-- Mobile close button -->
+    <button class="phet-modal-close-mobile" onclick="closeModal()">
+      <i class="fas fa-times-circle"></i>
+      <span>Đóng</span>
+    </button>
+    
+    <!-- Touch hint -->
+    <div class="phet-modal-touch-hint">
+      <span>Vuốt xuống hoặc nhấn ngoài để đóng</span>
+    </div>
+  </div>
+</div>
                     <ul class="actions">
                         <li><a href="https://phet.colorado.edu/vi/simulations/category/physics/sound-waves-and-music" class="button" target="_blank">Khám phá thêm mô phỏng PhET</a></li>
                     </ul>
@@ -143,6 +159,7 @@
    
 </body>
 </html>
+
 
 
 
