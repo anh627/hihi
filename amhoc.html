@@ -52,42 +52,23 @@
                     </div>
                     <!-- Modal cho mô phỏng toàn màn hình -->
                    <!-- Thay thế phần Modal hiển thị mô phỏng bằng code này -->
+<!-- Modal hiển thị mô phỏng - SIMPLIFIED -->
 <div class="phet-modal" id="phetModal">
   <div class="phet-modal-content">
-    <!-- Swipe indicator cho mobile -->
-    <div class="modal-swipe-indicator"></div>
+    <!-- Nút X đóng - Luôn hiển thị -->
+    <button class="modal-close-btn" onclick="closeModal()">✕</button>
     
-    <!-- Header modal -->
+    <!-- Header -->
     <div class="phet-modal-header">
-      <h3 class="phet-modal-title" id="modalTitle"></h3>
-      <button class="phet-modal-close" onclick="closeModal()" title="Đóng mô phỏng">
-        <i class="fas fa-times"></i>
-      </button>
+      <h3 class="phet-modal-title" id="modalTitle">Mô phỏng</h3>
     </div>
-
-    <!-- Nội dung -->
+    
+    <!-- Body chứa iframe -->
     <div class="phet-modal-body">
       <iframe id="modalIframe" src="" allowfullscreen></iframe>
     </div>
-
-    <!-- Mobile close button -->
-    <button class="phet-modal-close-mobile" onclick="closeModal()">
-      <i class="fas fa-times-circle"></i>
-      <span>Đóng</span>
-    </button>
-    
-    <!-- Touch hint -->
-    <div class="phet-modal-touch-hint">
-      <span>Vuốt xuống hoặc nhấn ngoài để đóng</span>
-    </div>
   </div>
 </div>
-                    <ul class="actions">
-                        <li><a href="https://phet.colorado.edu/vi/simulations/category/physics/sound-waves-and-music" class="button" target="_blank">Khám phá thêm mô phỏng PhET</a></li>
-                    </ul>
-                </section>
-            </div>
-        </div>
         <!-- Sidebar -->
         <div id="sidebar">
             <div class="inner">
@@ -159,6 +140,7 @@
    
 </body>
 </html>
+
 
 
 
