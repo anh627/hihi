@@ -824,7 +824,6 @@ strong, b {
     z-index: 2;
 }
 
-/* 🌟 Tiêu đề có hiệu ứng phát sáng trắng */
 #banner .content header h1 {
     font-size: 3.5rem;
     line-height: 1.2;
@@ -832,39 +831,39 @@ strong, b {
     font-family: var(--font-heading);
     font-weight: 900;
     color: #fff;
-    animation: titleGlow 3s ease-in-out infinite;
 
-    /* Hiệu ứng phát sáng trắng nhiều lớp */
+    /* ✨ Hiệu ứng phát sáng nhẹ xung quanh chữ */
     text-shadow:
-        0 0 5px rgba(255, 255, 255, 0.9),
-        0 0 10px rgba(255, 255, 255, 0.8),
-        0 0 20px rgba(255, 255, 255, 0.6),
-        0 0 40px rgba(255, 255, 255, 0.4);
+        0 0 4px rgba(255, 255, 255, 0.4),
+        0 0 8px rgba(255, 255, 255, 0.3),
+        0 0 12px rgba(255, 255, 255, 0.2);
+
+    animation: titleGlow 4s ease-in-out infinite;
 }
 
-/* 🌈 Chữ bên trong strong có hiệu ứng gradient động */
+/* 🌈 Chữ có gradient nhẹ trong phần <strong> */
 #banner .content header h1 strong {
     background: var(--gradient-sunset);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
-    animation: colorShift 5s ease-in-out infinite;
+    animation: colorShift 6s ease-in-out infinite;
 }
 
-/* ✨ Hiệu ứng phát sáng động cho chữ h1 */
+/* 🌟 Hiệu ứng glow động nhẹ, không chói */
 @keyframes titleGlow {
     0%, 100% {
         text-shadow:
-            0 0 8px rgba(255, 255, 255, 0.9),
-            0 0 16px rgba(255, 255, 255, 0.8),
-            0 0 32px rgba(255, 255, 255, 0.7);
+            0 0 4px rgba(255, 255, 255, 0.4),
+            0 0 8px rgba(255, 255, 255, 0.3),
+            0 0 12px rgba(255, 255, 255, 0.2);
     }
     50% {
         text-shadow:
-            0 0 12px rgba(255, 240, 200, 0.9),
-            0 0 24px rgba(255, 215, 150, 0.8),
-            0 0 48px rgba(255, 200, 100, 0.6);
+            0 0 6px rgba(255, 240, 200, 0.5),
+            0 0 10px rgba(255, 230, 180, 0.4),
+            0 0 14px rgba(255, 220, 150, 0.3);
     }
 }
 
@@ -1770,5 +1769,6 @@ a:focus-visible,
         background: transparent !important;
     }
 }
+
 
 
