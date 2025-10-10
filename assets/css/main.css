@@ -88,95 +88,95 @@
     --radius-2xl: 2rem;
     --radius-full: 9999px;
    
-    /* Enhanced Shadows */
+    /* Shadows */
     --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15), 0 6px 10px rgba(0, 0, 0, 0.08);
-    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2), 0 10px 15px rgba(0, 0, 0, 0.1);
-    --shadow-2xl: 0 30px 60px rgba(0, 0, 0, 0.3);
-    --shadow-colored: 0 15px 35px rgba(91, 95, 222, 0.25);
-    --shadow-glow: 0 0 40px rgba(91, 95, 222, 0.5);
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-colored: 0 10px 40px rgba(91, 95, 222, 0.2);
+    --shadow-glow: 0 0 30px rgba(91, 95, 222, 0.4);
    
-    /* Optimized Transitions */
-    --transition-fast: all 0.15s ease;
-    --transition-base: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-smooth: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Transitions */
+    --transition-fast: all 0.2s ease;
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* ============================================
-   3. ANIMATIONS - OPTIMIZED GRADIENT MOVEMENT
+   3. ANIMATIONS - GRADIENT MOVEMENT
    ============================================ */
 @keyframes gradientMove1 {
     0% {
         transform: translate(0, 0) rotate(0deg);
-        opacity: 0.4;
+        opacity: 0.3;
     }
     33% {
         transform: translate(30%, 30%) rotate(120deg);
-        opacity: 0.6;
+        opacity: 0.5;
     }
     66% {
         transform: translate(-20%, 50%) rotate(240deg);
-        opacity: 0.5;
+        opacity: 0.4;
     }
     100% {
         transform: translate(0, 0) rotate(360deg);
-        opacity: 0.4;
+        opacity: 0.3;
     }
 }
 
 @keyframes gradientMove2 {
     0% {
         transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 0.35;
+        opacity: 0.25;
     }
     50% {
         transform: translate(-40%, -30%) rotate(180deg) scale(1.2);
-        opacity: 0.5;
+        opacity: 0.4;
     }
     100% {
         transform: translate(0, 0) rotate(360deg) scale(1);
-        opacity: 0.35;
+        opacity: 0.25;
     }
 }
 
 @keyframes gradientMove3 {
     0% {
         transform: translate(0, 0) rotate(45deg);
-        opacity: 0.45;
+        opacity: 0.35;
     }
     25% {
         transform: translate(20%, -20%) rotate(135deg);
-        opacity: 0.6;
+        opacity: 0.5;
     }
     75% {
         transform: translate(-30%, 40%) rotate(315deg);
-        opacity: 0.4;
+        opacity: 0.3;
     }
     100% {
         transform: translate(0, 0) rotate(405deg);
-        opacity: 0.45;
+        opacity: 0.35;
     }
 }
 
 @keyframes gradientMove4 {
     0% {
         transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 0.4;
+        opacity: 0.3;
     }
     40% {
         transform: translate(25%, 35%) scale(1.15) rotate(144deg);
-        opacity: 0.55;
+        opacity: 0.45;
     }
     80% {
         transform: translate(-15%, -25%) scale(0.9) rotate(288deg);
-        opacity: 0.45;
+        opacity: 0.35;
     }
     100% {
         transform: translate(0, 0) scale(1) rotate(360deg);
-        opacity: 0.4;
+        opacity: 0.3;
     }
 }
 
@@ -234,10 +234,9 @@ body {
 }
 
 /* ============================================
-   5. ANIMATED GRADIENT BACKGROUND LAYERS - ENHANCED
+   5. ANIMATED GRADIENT BACKGROUND LAYERS
    ============================================ */
-/* Removed body::before as requested - it was too faint */
-
+body::before,
 body::after {
     content: '';
     position: fixed;
@@ -248,13 +247,23 @@ body::after {
     z-index: var(--z-base);
     pointer-events: none;
     will-change: transform, opacity;
-    background: radial-gradient(circle at 60% 30%, rgba(236, 72, 153, 0.4) 0%, transparent 50%),
-                radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.45) 0%, transparent 55%);
-    animation: gradientMove2 15s ease-in-out infinite; /* Reduced from 25s */
+}
+
+body::before {
+    background: radial-gradient(circle at 30% 40%, rgba(147, 51, 234, 0.4) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(91, 95, 222, 0.35) 0%, transparent 60%);
+    animation: gradientMove1 20s ease-in-out infinite;
     filter: blur(60px);
 }
 
-/* Enhanced Additional Gradient Layers */
+body::after {
+    background: radial-gradient(circle at 60% 30%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.35) 0%, transparent 55%);
+    animation: gradientMove2 25s ease-in-out infinite;
+    filter: blur(80px);
+}
+
+/* Additional Gradient Layers */
 #main::before,
 #main::after {
     content: '';
@@ -269,19 +278,17 @@ body::after {
 }
 
 #main::before {
-    background: radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.35) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.3) 0%, transparent 50%);
-    animation: gradientMove3 18s ease-in-out infinite; /* Reduced from 30s */
-    filter: blur(70px);
+    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.25) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);
+    animation: gradientMove3 30s ease-in-out infinite;
+    filter: blur(90px);
 }
 
-/* Enhanced #main::after for more vibrant effect */
 #main::after {
-    background: radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.35) 0%, transparent 55%),
-                radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 50% 10%, rgba(16, 185, 129, 0.3) 0%, transparent 50%);
-    animation: gradientMove4 12s ease-in-out infinite; /* Reduced from 22s */
-    filter: blur(50px);
+    background: radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.25) 0%, transparent 55%),
+                radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.3) 0%, transparent 60%);
+    animation: gradientMove4 22s ease-in-out infinite;
+    filter: blur(70px);
 }
 
 /* Prevent scroll when menu/modal is open */
@@ -313,15 +320,14 @@ img {
 }
 
 /* ============================================
-   6. TYPOGRAPHY - ENHANCED TEXT SHADOWS
+   6. TYPOGRAPHY
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.3;
-    color: var(--white);
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5),
-                 0 0 24px rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
     margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
     -webkit-font-smoothing: antialiased;
@@ -335,8 +341,7 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.3))
-            drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
 }
 
 h2 {
@@ -356,14 +361,13 @@ h6 { font-size: 1rem; font-weight: 600; }
 p {
     margin-bottom: 1.5rem;
     color: var(--white);
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 strong, b {
     color: var(--highlight);
     font-weight: 600;
-    text-shadow: 1px 1px 6px rgba(255, 215, 0, 0.5),
-                 0 0 12px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* ============================================
@@ -405,7 +409,7 @@ strong, b {
         rgba(0, 255, 255, 0.03) 50%, 
         transparent 100%);
     pointer-events: none;
-    animation: pulse 3s ease-in-out infinite; /* Reduced from 4s */
+    animation: pulse 4s ease-in-out infinite;
 }
 
 #sidebar .inner {
@@ -544,7 +548,7 @@ strong, b {
     margin: 0.5rem 0 0.5rem 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Reduced from 0.5s */
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #menu > ul > li.active > ul {
@@ -685,9 +689,8 @@ strong, b {
 #sidebar::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #00ffff 0%, #00aaff 100%);
 }
-
 /* ============================================
-   7. MAIN CONTENT - OPTIMIZED WITH ANIMATED BG
+   7. MAIN CONTENT - OPTIMIZED
    ============================================ */
 #main {
     margin-left: var(--sidebar-width);
@@ -697,7 +700,7 @@ strong, b {
     position: relative;
     background: linear-gradient(88deg, #4251ce, #e73c7e, #23a6d5, #7a41ae);
     background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite; /* Reduced from 25s */
+    animation: gradientShift 25s ease infinite;
     overflow: hidden;
     width: calc(100% - var(--sidebar-width));
     z-index: var(--z-base);
@@ -707,6 +710,18 @@ strong, b {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+#main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    z-index: 1;
 }
 
 #main > * {
@@ -731,8 +746,8 @@ strong, b {
     font-size: 3rem;
     opacity: 0.25;
     color: rgba(255, 255, 255, 0.9);
-    animation: floatIcon 20s ease-in-out infinite; /* Reduced from 30s */
-    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+    animation: floatIcon 30s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     will-change: transform;
     transform: translateZ(0);
 }
@@ -748,11 +763,11 @@ strong, b {
     }
 }
 
-.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: 22s; }
-.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: 25s; }
-.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: 23s; }
-.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: 20s; }
-.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: 24s; }
+.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: 35s; }
+.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: 40s; }
+.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: 38s; }
+.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: 32s; }
+.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: 36s; }
 
 .floating-icon.math { color: #FFFFFF; }
 .floating-icon.science { color: #FFD700; }
@@ -778,7 +793,7 @@ strong, b {
     background: white;
     border-radius: 50%;
     opacity: 0.6;
-    animation: particleFloat 18s linear infinite; /* Reduced from 25s */
+    animation: particleFloat 25s linear infinite;
     will-change: transform;
     transform: translateZ(0);
 }
@@ -796,11 +811,11 @@ strong, b {
     }
 }
 
-.particle:nth-child(1) { left: 10%; animation-duration: 18s; animation-delay: 0s; }
-.particle:nth-child(2) { left: 30%; animation-duration: 20s; animation-delay: 5s; }
-.particle:nth-child(3) { left: 50%; animation-duration: 22s; animation-delay: 10s; }
-.particle:nth-child(4) { left: 70%; animation-duration: 19s; animation-delay: 15s; }
-.particle:nth-child(5) { left: 90%; animation-duration: 21s; animation-delay: 20s; }
+.particle:nth-child(1) { left: 10%; animation-duration: 25s; animation-delay: 0s; }
+.particle:nth-child(2) { left: 30%; animation-duration: 28s; animation-delay: 5s; }
+.particle:nth-child(3) { left: 50%; animation-duration: 30s; animation-delay: 10s; }
+.particle:nth-child(4) { left: 70%; animation-duration: 27s; animation-delay: 15s; }
+.particle:nth-child(5) { left: 90%; animation-duration: 29s; animation-delay: 20s; }
 
 /* Reduce animations on touch devices */
 @media (pointer: coarse) {
@@ -827,7 +842,7 @@ strong, b {
     height: 3px;
     background: var(--gradient-vibrant);
     border-radius: 2px;
-    animation: shimmer 2s ease-in-out infinite; /* Reduced from 3s */
+    animation: shimmer 3s ease-in-out infinite;
 }
 
 @keyframes shimmer {
@@ -846,8 +861,7 @@ strong, b {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.4))
-            drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
 }
 
 /* Banner */
@@ -879,7 +893,7 @@ strong, b {
     content: '';
     position: absolute;
     border-radius: 50%;
-    animation: float 15s ease-in-out infinite; /* Reduced from 20s */
+    animation: float 20s ease-in-out infinite;
 }
 
 #banner::before {
@@ -916,12 +930,12 @@ strong, b {
     margin-bottom: 1rem;
     font-family: var(--font-heading);
     font-weight: 900;
-    animation: titleGlow 2.5s ease-in-out infinite; /* Reduced from 3s */
+    animation: titleGlow 3s ease-in-out infinite;
 }
 
 @keyframes titleGlow {
-    0%, 100% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.6)); }
-    50% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.9)); }
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)); }
+    50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)); }
 }
 
 #banner .content header h1 strong {
@@ -930,7 +944,7 @@ strong, b {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
-    animation: colorShift 4s ease-in-out infinite; /* Reduced from 5s */
+    animation: colorShift 5s ease-in-out infinite;
 }
 
 @keyframes colorShift {
@@ -946,17 +960,17 @@ strong, b {
     font-weight: 600;
     margin-bottom: 2rem;
     font-family: var(--font-heading);
-    animation: fadeInUp 0.8s ease 0.3s both; /* Reduced from 1s */
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    animation: fadeInUp 1s ease 0.3s both;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 #banner .content > p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--white);
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     font-family: var(--font-primary);
-    animation: fadeInUp 0.8s ease 0.5s both; /* Reduced from 1s */
+    animation: fadeInUp 1s ease 0.5s both;
 }
 
 @keyframes fadeInUp {
@@ -976,7 +990,7 @@ strong, b {
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-    animation: imageFloat 3s ease-in-out infinite; /* Reduced from 4s */
+    animation: imageFloat 4s ease-in-out infinite;
 }
 
 @keyframes imageFloat {
@@ -988,7 +1002,7 @@ strong, b {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease; /* Reduced from 0.5s */
+    transition: transform 0.5s ease;
 }
 
 #banner .image.object:hover img {
@@ -1008,8 +1022,7 @@ section header.major h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.4))
-            drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
     font-family: var(--font-heading);
     font-weight: 800;
 }
@@ -1074,7 +1087,7 @@ section header.major h2 {
     color: var(--white);
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    animation: iconPulse 2.5s ease-in-out infinite; /* Reduced from 3s */
+    animation: iconPulse 3s ease-in-out infinite;
 }
 
 @keyframes iconPulse {
@@ -1089,7 +1102,7 @@ section header.major h2 {
 }
 
 .features article:hover .icon {
-    animation: iconBounce 0.5s ease; /* Reduced from 0.6s */
+    animation: iconBounce 0.6s ease;
 }
 
 @keyframes iconBounce {
@@ -1104,7 +1117,7 @@ section header.major h2 {
 .features article:nth-child(3) .icon { background: var(--gradient-nature); }
 
 .features article:hover .icon i {
-    animation: iconRotate 0.6s ease; /* Reduced from 0.8s */
+    animation: iconRotate 0.8s ease;
 }
 
 @keyframes iconRotate {
@@ -1114,7 +1127,7 @@ section header.major h2 {
 
 .features article .content h3 {
     color: var(--white);
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     margin-bottom: 1rem;
     font-size: 1.4rem;
     font-family: var(--font-heading);
@@ -1123,7 +1136,7 @@ section header.major h2 {
 
 .features article .content p {
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     line-height: 1.8;
     margin: 0;
     font-family: var(--font-primary);
@@ -1172,7 +1185,7 @@ section header.major h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease; /* Reduced from 0.5s */
+    transition: transform 0.5s ease;
 }
 
 .posts article:hover .image img {
@@ -1182,7 +1195,7 @@ section header.major h2 {
 .posts article h3 {
     padding: 1.5rem 1.5rem 0.5rem;
     color: var(--white);
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     font-size: 1.3rem;
     font-family: var(--font-heading);
     font-weight: 700;
@@ -1191,7 +1204,7 @@ section header.major h2 {
 .posts article p {
     padding: 0 1.5rem;
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     line-height: 1.7;
     font-family: var(--font-primary);
 }
@@ -1214,9 +1227,9 @@ section header.major h2 {
     font-family: var(--font-primary);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     transition: var(--transition-spring);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -1232,7 +1245,7 @@ section header.major h2 {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     transform: translate(-50%, -50%);
-    transition: width 0.5s ease, height 0.5s ease; /* Reduced from 0.6s */
+    transition: width 0.6s ease, height 0.6s ease;
 }
 
 .button:hover::before {
@@ -1244,7 +1257,7 @@ section header.major h2 {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     color: var(--white);
 }
 
@@ -1257,6 +1270,7 @@ ul.actions {
 }
 
 /* ============================================
+  /* ============================================
    8. PHET SIMULATIONS - CARD LAYOUT
    ============================================ */
 
@@ -1303,7 +1317,7 @@ ul.actions {
     width: 100%;
     height: 180px;
     object-fit: cover; /* Đảm bảo ảnh không bị méo */
-    transition: transform 0.3s ease; /* Reduced from 0.4s */
+    transition: transform 0.4s ease;
 }
 
 .sim-card:hover img {
@@ -1317,7 +1331,6 @@ ul.actions {
     font-family: var(--font-heading);
     margin: 0;
     padding: 1rem 1.5rem 0.5rem; /* Canh lề cho tiêu đề */
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Mô tả thẻ (đã bỏ padding-left) */
@@ -1328,7 +1341,6 @@ ul.actions {
     margin: 0;
     padding: 0 1.5rem 1.5rem;
     flex-grow: 1; /* Giúp các thẻ có cùng chiều cao */
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Nút mở rộng toàn màn hình */
@@ -1357,6 +1369,7 @@ ul.actions {
     background: var(--primary);
 }
 
+
 /* ============================================
    9. FULLSCREEN MODAL - SIMPLIFIED
    ============================================ */
@@ -1371,7 +1384,7 @@ ul.actions {
     backdrop-filter: blur(8px);
     z-index: var(--z-modal);
     opacity: 0;
-    transition: opacity 0.25s ease; /* Reduced from 0.3s */
+    transition: opacity 0.3s ease;
     align-items: center;
     justify-content: center;
 }
@@ -1391,7 +1404,7 @@ ul.actions {
     border-radius: var(--radius-lg);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
     transform: scale(0.8);
-    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Reduced from 0.3s */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -1463,7 +1476,6 @@ ul.actions {
         width: calc(100% - var(--sidebar-width));
     }
 }
-
 /* ============================================
    10. RESPONSIVE DESIGN
    ============================================ */
@@ -1838,3 +1850,4 @@ a:focus-visible,
         background: transparent !important;
     }
 }
+
