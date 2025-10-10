@@ -36,6 +36,10 @@
     /* Animated Background Gradient */
     --gradient-animated-bg: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
    
+    /* Text Shadow cho màu vàng/gradient */
+    --text-shadow-white: 0 0 20px rgba(255, 255, 255, 0.5), 0 2px 4px rgba(255, 255, 255, 0.3);
+    --text-shadow-glow: 0 0 30px rgba(255, 215, 0, 0.6), 0 3px 6px rgba(255, 255, 255, 0.4);
+   
     /* Neutrals */
     --white: #FFFFFF;
     --gray-50: #F9FAFB;
@@ -103,80 +107,114 @@
     --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* Performance settings */
+    --enable-animations: 1;
+}
+
+/* Performance mode for low-end devices */
+@media (max-width: 768px) and (hover: none) {
+    :root {
+        --enable-animations: 0.5; /* Giảm 50% animation trên mobile */
+    }
 }
 
 /* ============================================
-   3. ANIMATIONS - GRADIENT MOVEMENT
+   3. ANIMATIONS - OPTIMIZED GRADIENT MOVEMENT
    ============================================ */
 @keyframes gradientMove1 {
     0% {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translate3d(0, 0, 0) rotate(0deg);
         opacity: 0.3;
     }
     33% {
-        transform: translate(30%, 30%) rotate(120deg);
+        transform: translate3d(30%, 30%, 0) rotate(120deg);
         opacity: 0.5;
     }
     66% {
-        transform: translate(-20%, 50%) rotate(240deg);
+        transform: translate3d(-20%, 50%, 0) rotate(240deg);
         opacity: 0.4;
     }
     100% {
-        transform: translate(0, 0) rotate(360deg);
+        transform: translate3d(0, 0, 0) rotate(360deg);
         opacity: 0.3;
     }
 }
 
 @keyframes gradientMove2 {
     0% {
-        transform: translate(0, 0) rotate(0deg) scale(1);
+        transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
         opacity: 0.25;
     }
     50% {
-        transform: translate(-40%, -30%) rotate(180deg) scale(1.2);
+        transform: translate3d(-40%, -30%, 0) rotate(180deg) scale(1.2);
         opacity: 0.4;
     }
     100% {
-        transform: translate(0, 0) rotate(360deg) scale(1);
+        transform: translate3d(0, 0, 0) rotate(360deg) scale(1);
         opacity: 0.25;
     }
 }
 
 @keyframes gradientMove3 {
     0% {
-        transform: translate(0, 0) rotate(45deg);
+        transform: translate3d(0, 0, 0) rotate(45deg);
         opacity: 0.35;
     }
     25% {
-        transform: translate(20%, -20%) rotate(135deg);
+        transform: translate3d(20%, -20%, 0) rotate(135deg);
         opacity: 0.5;
     }
     75% {
-        transform: translate(-30%, 40%) rotate(315deg);
+        transform: translate3d(-30%, 40%, 0) rotate(315deg);
         opacity: 0.3;
     }
     100% {
-        transform: translate(0, 0) rotate(405deg);
+        transform: translate3d(0, 0, 0) rotate(405deg);
         opacity: 0.35;
     }
 }
 
 @keyframes gradientMove4 {
     0% {
-        transform: translate(0, 0) scale(1) rotate(0deg);
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
         opacity: 0.3;
     }
     40% {
-        transform: translate(25%, 35%) scale(1.15) rotate(144deg);
+        transform: translate3d(25%, 35%, 0) scale(1.15) rotate(144deg);
         opacity: 0.45;
     }
     80% {
-        transform: translate(-15%, -25%) scale(0.9) rotate(288deg);
+        transform: translate3d(-15%, -25%, 0) scale(0.9) rotate(288deg);
         opacity: 0.35;
     }
     100% {
-        transform: translate(0, 0) scale(1) rotate(360deg);
+        transform: translate3d(0, 0, 0) scale(1) rotate(360deg);
         opacity: 0.3;
+    }
+}
+
+/* Animation cho main background - FIX cho PC */
+@keyframes gradientShift {
+    0% { 
+        background-position: 0% 50%;
+        transform: scale(1) rotate(0deg);
+    }
+    25% { 
+        background-position: 50% 100%;
+        transform: scale(1.01) rotate(0.5deg);
+    }
+    50% { 
+        background-position: 100% 50%;
+        transform: scale(1.02) rotate(0deg);
+    }
+    75% { 
+        background-position: 50% 0%;
+        transform: scale(1.01) rotate(-0.5deg);
+    }
+    100% { 
+        background-position: 0% 50%;
+        transform: scale(1) rotate(0deg);
     }
 }
 
@@ -209,6 +247,10 @@
     box-sizing: border-box;
 }
 
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 html {
     scroll-behavior: smooth;
@@ -230,8 +272,65 @@ body {
 }
 
 /* ============================================
-   5. ANIMATED GRADIENT BACKGROUND LAYERS
+   5. ANIMATED GRADIENT BACKGROUND LAYERS - OPTIMIZED
    ============================================ */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    width: 150vw;
+    height: 150vh;
+    top: -25vh;
+    left: -25vw;
+    z-index: var(--z-base);
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+    animation-play-state: running; /* Ensure animation runs */
+}
+
+body::before {
+    background: radial-gradient(circle at 30% 40%, rgba(147, 51, 234, 0.4) 0%, transparent 60%),
+                radial-gradient(circle at 70% 60%, rgba(91, 95, 222, 0.35) 0%, transparent 60%);
+    animation: gradientMove1 calc(20s * var(--enable-animations)) ease-in-out infinite;
+    filter: blur(60px);
+}
+
+body::after {
+    background: radial-gradient(circle at 60% 30%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.35) 0%, transparent 55%);
+    animation: gradientMove2 calc(25s * var(--enable-animations)) ease-in-out infinite;
+    filter: blur(80px);
+}
+
+/* Additional Gradient Layers - OPTIMIZED */
+#main::before,
+#main::after {
+    content: '';
+    position: fixed;
+    width: 120vw;
+    height: 120vh;
+    top: -10vh;
+    left: -10vw;
+    z-index: var(--z-particles);
+    pointer-events: none;
+    will-change: transform, opacity;
+    transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+}
+
+#main::before {
+    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.25) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);
+    animation: gradientMove3 calc(30s * var(--enable-animations)) ease-in-out infinite;
+    filter: blur(90px);
+}
+
+#main::after {
+    background: radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.25) 0%, transparent 55%),
+                radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.3) 0%, transparent 60%);
+    animation: gradientMove4 calc(22s * var(--enable-animations)) ease-in-out infinite;
+    filter: blur(70px);
+}
 
 /* Prevent scroll when menu/modal is open */
 body.menu-open,
@@ -262,7 +361,7 @@ img {
 }
 
 /* ============================================
-   6. TYPOGRAPHY
+   6. TYPOGRAPHY - ENHANCED WITH WHITE SHADOW
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
@@ -283,7 +382,8 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
+    text-shadow: var(--text-shadow-glow); /* Thêm shadow trắng cho text gradient */
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
 }
 
 h2 {
@@ -306,10 +406,11 @@ p {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+/* Text màu vàng/highlight với shadow trắng */
 strong, b {
     color: var(--highlight);
     font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.4);
 }
 
 /* ============================================
@@ -351,7 +452,7 @@ strong, b {
         rgba(0, 255, 255, 0.03) 50%, 
         transparent 100%);
     pointer-events: none;
-    animation: pulse 4s ease-in-out infinite;
+    animation: pulse calc(4s * var(--enable-animations)) ease-in-out infinite;
 }
 
 #sidebar .inner {
@@ -431,7 +532,7 @@ strong, b {
     letter-spacing: 0.1em;
     margin: 0;
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 #menu > ul {
@@ -468,6 +569,7 @@ strong, b {
     padding-left: 1.5rem;
     border-color: rgba(0, 255, 255, 0.3);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 #menu .opener::after {
@@ -542,7 +644,7 @@ strong, b {
     letter-spacing: 0.1em;
     margin: 0 0 1rem 0;
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
 #sidebar section p {
@@ -631,8 +733,9 @@ strong, b {
 #sidebar::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #00ffff 0%, #00aaff 100%);
 }
+
 /* ============================================
-   7. MAIN CONTENT - OPTIMIZED
+   7. MAIN CONTENT - OPTIMIZED WITH ANIMATED BG
    ============================================ */
 #main {
     margin-left: var(--sidebar-width);
@@ -642,28 +745,12 @@ strong, b {
     position: relative;
     background: linear-gradient(88deg, #4251ce, #e73c7e, #23a6d5, #7a41ae);
     background-size: 400% 400%;
-    animation: gradientShift 25s ease infinite;
+    animation: gradientShift calc(25s * var(--enable-animations)) ease infinite;
     overflow: hidden;
     width: calc(100% - var(--sidebar-width));
     z-index: var(--z-base);
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-#main::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
-    pointer-events: none;
-    z-index: 1;
+    transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+    will-change: background-position, transform;
 }
 
 #main > * {
@@ -671,7 +758,7 @@ strong, b {
     z-index: var(--z-content);
 }
 
-/* Floating Icons - FIXED Z-INDEX */
+/* Floating Icons - OPTIMIZED */
 .floating-icons {
     position: fixed;
     top: 0;
@@ -688,36 +775,52 @@ strong, b {
     font-size: 3rem;
     opacity: 0.25;
     color: rgba(255, 255, 255, 0.9);
-    animation: floatIcon 30s ease-in-out infinite;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    animation: floatIcon calc(30s * var(--enable-animations)) ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
     will-change: transform;
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
 }
 
 @keyframes floatIcon {
     0%, 100% {
-        transform: translateY(0) translateX(0) rotate(0deg);
+        transform: translate3d(0, 0, 0) rotate(0deg);
         opacity: 0.25;
     }
     50% {
-        transform: translateY(-30px) translateX(20px) rotate(180deg);
+        transform: translate3d(20px, -30px, 0) rotate(180deg);
         opacity: 0.3;
     }
 }
 
-.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: 35s; }
-.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: 40s; }
-.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: 38s; }
-.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: 32s; }
-.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: 36s; }
+.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: calc(35s * var(--enable-animations)); }
+.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: calc(40s * var(--enable-animations)); }
+.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: calc(38s * var(--enable-animations)); }
+.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: calc(32s * var(--enable-animations)); }
+.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: calc(36s * var(--enable-animations)); }
 
-.floating-icon.math { color: #FFFFFF; }
-.floating-icon.science { color: #FFD700; }
-.floating-icon.tech { color: #FFFFFF; }
-.floating-icon.engineering { color: #FFD700; }
-.floating-icon.creative { color: #FFFFFF; }
+/* Màu icon với white shadow */
+.floating-icon.math { 
+    color: #FFFFFF; 
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+}
+.floating-icon.science { 
+    color: #FFD700; 
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+}
+.floating-icon.tech { 
+    color: #FFFFFF; 
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+}
+.floating-icon.engineering { 
+    color: #FFD700; 
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+}
+.floating-icon.creative { 
+    color: #FFFFFF; 
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+}
 
-/* Particles - FIXED Z-INDEX */
+/* Particles - OPTIMIZED */
 .particles {
     position: fixed;
     top: 0;
@@ -735,34 +838,47 @@ strong, b {
     background: white;
     border-radius: 50%;
     opacity: 0.6;
-    animation: particleFloat 25s linear infinite;
+    animation: particleFloat calc(25s * var(--enable-animations)) linear infinite;
     will-change: transform;
-    transform: translateZ(0);
+    transform: translate3d(0, 0, 0);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 @keyframes particleFloat {
     from {
-        transform: translateY(100vh) rotate(0deg);
+        transform: translate3d(0, 100vh, 0) rotate(0deg);
         opacity: 0;
     }
     10% { opacity: 0.6; }
     90% { opacity: 0.6; }
     to {
-        transform: translateY(-100vh) rotate(360deg);
+        transform: translate3d(0, -100vh, 0) rotate(360deg);
         opacity: 0;
     }
 }
 
-.particle:nth-child(1) { left: 10%; animation-duration: 25s; animation-delay: 0s; }
-.particle:nth-child(2) { left: 30%; animation-duration: 28s; animation-delay: 5s; }
-.particle:nth-child(3) { left: 50%; animation-duration: 30s; animation-delay: 10s; }
-.particle:nth-child(4) { left: 70%; animation-duration: 27s; animation-delay: 15s; }
-.particle:nth-child(5) { left: 90%; animation-duration: 29s; animation-delay: 20s; }
+.particle:nth-child(1) { left: 10%; animation-duration: calc(25s * var(--enable-animations)); animation-delay: 0s; }
+.particle:nth-child(2) { left: 30%; animation-duration: calc(28s * var(--enable-animations)); animation-delay: 5s; }
+.particle:nth-child(3) { left: 50%; animation-duration: calc(30s * var(--enable-animations)); animation-delay: 10s; }
+.particle:nth-child(4) { left: 70%; animation-duration: calc(27s * var(--enable-animations)); animation-delay: 15s; }
+.particle:nth-child(5) { left: 90%; animation-duration: calc(29s * var(--enable-animations)); animation-delay: 20s; }
 
-/* Reduce animations on touch devices */
+/* Performance optimization for mobile/touch devices */
 @media (pointer: coarse) {
     .floating-icon:nth-child(n+4) { display: none; }
     .particle:nth-child(n+4) { display: none; }
+    
+    /* Giảm độ phức tạp animation trên mobile */
+    #main {
+        animation-duration: 40s;
+    }
+    
+    body::before,
+    body::after,
+    #main::before,
+    #main::after {
+        animation-duration: 40s;
+    }
 }
 
 /* Header */
@@ -775,6 +891,17 @@ strong, b {
     position: relative;
 }
 
+#header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-vibrant);
+    border-radius: 2px;
+    animation: shimmer calc(3s * var(--enable-animations)) ease-in-out infinite;
+}
 
 @keyframes shimmer {
     0%, 100% { opacity: 0.6; transform: scaleX(0.8); }
@@ -792,7 +919,7 @@ strong, b {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
 }
 
 /* Banner */
@@ -819,6 +946,31 @@ strong, b {
     }
 }
 
+#banner::before,
+#banner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    animation: float calc(20s * var(--enable-animations)) ease-in-out infinite;
+}
+
+#banner::before {
+    top: -50%;
+    right: -10%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+}
+
+#banner::after {
+    bottom: -30%;
+    left: -10%;
+    width: 40%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(91, 95, 222, 0.1) 0%, transparent 70%);
+    animation-direction: reverse;
+}
+
 #banner .content {
     position: relative;
     z-index: 2;
@@ -830,44 +982,27 @@ strong, b {
     margin-bottom: 1rem;
     font-family: var(--font-heading);
     font-weight: 900;
-    color: #fff;
-
-    /* ✨ Hiệu ứng phát sáng nhẹ xung quanh chữ */
-    text-shadow:
-        0 0 4px rgba(255, 255, 255, 0.4),
-        0 0 8px rgba(255, 255, 255, 0.3),
-        0 0 12px rgba(255, 255, 255, 0.2);
-
-    animation: titleGlow 4s ease-in-out infinite;
+    animation: titleGlow calc(3s * var(--enable-animations)) ease-in-out infinite;
 }
 
-/* 🌈 Chữ có gradient nhẹ trong phần <strong> */
+@keyframes titleGlow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.4)); 
+    }
+    50% { 
+        filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)); 
+    }
+}
+
 #banner .content header h1 strong {
     background: var(--gradient-sunset);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
-    animation: colorShift 6s ease-in-out infinite;
+    animation: colorShift calc(5s * var(--enable-animations)) ease-in-out infinite;
 }
 
-/* 🌟 Hiệu ứng glow động nhẹ, không chói */
-@keyframes titleGlow {
-    0%, 100% {
-        text-shadow:
-            0 0 4px rgba(255, 255, 255, 0.4),
-            0 0 8px rgba(255, 255, 255, 0.3),
-            0 0 12px rgba(255, 255, 255, 0.2);
-    }
-    50% {
-        text-shadow:
-            0 0 6px rgba(255, 240, 200, 0.5),
-            0 0 10px rgba(255, 230, 180, 0.4),
-            0 0 14px rgba(255, 220, 150, 0.3);
-    }
-}
-
-/* 🎨 Hiệu ứng chuyển màu gradient cho chữ strong */
 @keyframes colorShift {
     0%, 100% { filter: hue-rotate(0deg) brightness(1.2); }
     25% { filter: hue-rotate(45deg) brightness(1.3); }
@@ -875,7 +1010,6 @@ strong, b {
     75% { filter: hue-rotate(-45deg) brightness(1.3); }
 }
 
-/* Đoạn mô tả dưới tiêu đề */
 #banner .content header p {
     font-size: 1.3rem;
     color: var(--highlight);
@@ -883,10 +1017,9 @@ strong, b {
     margin-bottom: 2rem;
     font-family: var(--font-heading);
     animation: fadeInUp 1s ease 0.3s both;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
-/* Đoạn mô tả phụ */
 #banner .content > p {
     font-size: 1.1rem;
     line-height: 1.8;
@@ -896,25 +1029,29 @@ strong, b {
     animation: fadeInUp 1s ease 0.5s both;
 }
 
-/* Hiệu ứng fade in */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Hình ảnh trong banner */
 #banner .image.object {
     position: relative;
     z-index: 2;
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-    animation: imageFloat 4s ease-in-out infinite;
+    animation: imageFloat calc(4s * var(--enable-animations)) ease-in-out infinite;
 }
 
 @keyframes imageFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(1deg); }
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    50% { transform: translate3d(0, -10px, 0) rotate(1deg); }
 }
 
 #banner .image.object img {
@@ -941,7 +1078,7 @@ section header.major h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
     font-family: var(--font-heading);
     font-weight: 800;
 }
@@ -1006,7 +1143,7 @@ section header.major h2 {
     color: var(--white);
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    animation: iconPulse 3s ease-in-out infinite;
+    animation: iconPulse calc(3s * var(--enable-animations)) ease-in-out infinite;
 }
 
 @keyframes iconPulse {
@@ -1189,33 +1326,27 @@ ul.actions {
 }
 
 /* ============================================
-  /* ============================================
    8. PHET SIMULATIONS - CARD LAYOUT
    ============================================ */
-
-/* Lưới chứa các thẻ mô phỏng */
 .sim-grid {
     display: grid;
-    /* Tạo các cột tự động, mỗi cột rộng tối thiểu 300px */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem; /* Khoảng cách giữa các thẻ */
+    gap: 2rem;
     margin-bottom: 3rem;
 }
 
-/* Kiểu dáng cho mỗi thẻ mô phỏng (thay thế .simulation-item cũ) */
 .sim-card {
     background: rgba(30, 33, 57, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-xl);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition-spring);
-    overflow: hidden; /* Quan trọng để bo góc hình ảnh */
-    position: relative; /* Để định vị nút expand */
+    overflow: hidden;
+    position: relative;
     display: flex;
-    flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+    flex-direction: column;
 }
 
-/* Hiệu ứng kính mờ (nếu trình duyệt hỗ trợ) */
 @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
     .sim-card {
         background: rgba(255, 255, 255, 0.15);
@@ -1224,45 +1355,40 @@ ul.actions {
     }
 }
 
-/* Hiệu ứng khi di chuột vào thẻ */
 .sim-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     background: rgba(255, 255, 255, 0.2);
 }
 
-/* Hình ảnh của thẻ */
 .sim-card img {
     width: 100%;
     height: 180px;
-    object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    object-fit: cover;
     transition: transform 0.4s ease;
 }
 
 .sim-card:hover img {
-    transform: scale(1.05); /* Hiệu ứng phóng to ảnh khi hover */
+    transform: scale(1.05);
 }
 
-/* Tiêu đề thẻ (đã bỏ padding-left và ::before) */
 .sim-card h3 {
     color: var(--white);
     font-size: 1.3rem;
     font-family: var(--font-heading);
     margin: 0;
-    padding: 1rem 1.5rem 0.5rem; /* Canh lề cho tiêu đề */
+    padding: 1rem 1.5rem 0.5rem;
 }
 
-/* Mô tả thẻ (đã bỏ padding-left) */
 .sim-card p {
     color: rgba(255, 255, 255, 0.9);
     font-size: 0.95rem;
     line-height: 1.7;
     margin: 0;
     padding: 0 1.5rem 1.5rem;
-    flex-grow: 1; /* Giúp các thẻ có cùng chiều cao */
+    flex-grow: 1;
 }
 
-/* Nút mở rộng toàn màn hình */
 .expand-btn {
     position: absolute;
     top: 1rem;
@@ -1288,12 +1414,11 @@ ul.actions {
     background: var(--primary);
 }
 
-
 /* ============================================
    9. FULLSCREEN MODAL - SIMPLIFIED
    ============================================ */
 .phet-modal {
-    display: none; /* Mặc định ẩn */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -1308,7 +1433,6 @@ ul.actions {
     justify-content: center;
 }
 
-/* Lớp .active sẽ được thêm bằng JS để hiện modal */
 .phet-modal.active {
     display: flex;
     opacity: 1;
@@ -1319,7 +1443,7 @@ ul.actions {
     width: 95%;
     height: 95%;
     max-width: 1600px;
-    background: #1e2139; /* Nền tối hơn */
+    background: #1e2139;
     border-radius: var(--radius-lg);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
     transform: scale(0.8);
@@ -1330,7 +1454,7 @@ ul.actions {
 }
 
 .phet-modal.active .phet-modal-content {
-    transform: scale(1); /* Hiệu ứng phóng to khi hiện ra */
+    transform: scale(1);
 }
 
 .phet-modal-header {
@@ -1339,7 +1463,7 @@ ul.actions {
     align-items: center;
     padding: 0 0.5rem 0.8rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0; /* Header không co lại */
+    flex-shrink: 0;
 }
 
 .phet-modal-title {
@@ -1348,7 +1472,6 @@ ul.actions {
     font-weight: 600;
 }
 
-/* Nút đóng modal (cho cả desktop và mobile) */
 .phet-modal-close {
     background: transparent;
     border: none;
@@ -1366,10 +1489,10 @@ ul.actions {
 }
 
 .phet-modal-body {
-    flex-grow: 1; /* Body chiếm hết không gian còn lại */
+    flex-grow: 1;
     margin-top: 1rem;
     border-radius: var(--radius-md);
-    overflow: hidden; /* Quan trọng để iframe bo góc */
+    overflow: hidden;
     background: #000;
 }
 
@@ -1379,7 +1502,6 @@ ul.actions {
     border: none;
 }
 
-/* Gợi ý thoát (nếu cần) */
 .phet-modal-hint {
     text-align: center;
     color: var(--gray-500);
@@ -1388,21 +1510,21 @@ ul.actions {
     padding-bottom: 0.5rem;
 }
 
-/* Trên desktop, modal không che sidebar */
 @media screen and (min-width: 1025px) {
     .phet-modal {
         left: var(--sidebar-width);
         width: calc(100% - var(--sidebar-width));
     }
 }
+
 /* ============================================
-   10. RESPONSIVE DESIGN
+   10. RESPONSIVE DESIGN - OPTIMIZED
    ============================================ */
-/* Tablet */
 @media screen and (max-width: 1024px) {
     :root {
         --sidebar-width: 260px;
         --content-padding: 1.5rem;
+        --enable-animations: 0.7; /* Giảm animation trên tablet */
     }
    
     #main {
@@ -1431,7 +1553,6 @@ ul.actions {
         display: none;
     }
     
-    /* Modal on tablet - full screen */
     .phet-modal {
         left: 0 !important;
         width: 100% !important;
@@ -1460,8 +1581,11 @@ ul.actions {
     }
 }
 
-/* Mobile */
 @media screen and (max-width: 768px) {
+    :root {
+        --enable-animations: 0.5; /* Giảm 50% animation trên mobile */
+    }
+    
     #sidebar {
         position: fixed;
         left: 0;
@@ -1502,7 +1626,6 @@ ul.actions {
         user-select: none;
     }
     
-    /* Safe area for menu toggle */
     @supports (top: env(safe-area-inset-top)) {
         .menu-toggle {
             top: calc(1rem + env(safe-area-inset-top));
@@ -1585,7 +1708,6 @@ ul.actions {
         left: 0;
     }
     
-    /* PhET Simulation on mobile */
     .phet-simulation {
         padding-bottom: 75%;
     }
@@ -1609,7 +1731,6 @@ ul.actions {
         font-size: 0.95rem;
     }
     
-    /* Modal on mobile */
     .phet-modal-content {
         width: 100%;
         height: 100%;
@@ -1629,8 +1750,11 @@ ul.actions {
     }
 }
 
-/* Small Mobile */
 @media screen and (max-width: 480px) {
+    :root {
+        --enable-animations: 0.3; /* Giảm 70% animation trên mobile nhỏ */
+    }
+    
     #sidebar {
         width: 260px;
     }
@@ -1673,7 +1797,6 @@ ul.actions {
     }
 }
 
-/* Desktop - Ensure no overflow */
 @media screen and (min-width: 769px) {
     .menu-toggle {
         display: none !important;
@@ -1698,7 +1821,6 @@ ul.actions {
     }
 }
 
-/* Landscape mode on mobile */
 @media screen and (max-width: 768px) and (orientation: landscape) {
     #sidebar {
         width: 270px;
@@ -1714,11 +1836,28 @@ ul.actions {
    11. PERFORMANCE OPTIMIZATIONS
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
+    :root {
+        --enable-animations: 0.01; /* Tắt gần như hoàn toàn animation */
+    }
+    
     * {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+/* GPU Acceleration for critical animations */
+.floating-icon,
+.particle,
+#main,
+body::before,
+body::after,
+#main::before,
+#main::after {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 /* ============================================
@@ -1769,6 +1908,3 @@ a:focus-visible,
         background: transparent !important;
     }
 }
-
-
-
