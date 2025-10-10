@@ -327,8 +327,8 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.3;
     color: var(--white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 0 0 1rem 0;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+     margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -341,13 +341,9 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
     text-shadow:
-        /* bóng trắng lệch */
-        2px 2px 5px rgba(255, 255, 255, 0.25),
-        /* ánh sáng xung quanh chữ */
-        0 0 6px rgba(255, 255, 255, 0.3),
-        0 0 12px rgba(255, 255, 255, 0.2);
+        0 1 2px rgba(255, 255, 255, 0.9),
+   
 }
 
 h2 {
@@ -367,7 +363,8 @@ h6 { font-size: 1rem; font-weight: 600; }
 p {
     margin-bottom: 1.5rem;
     color: var(--white);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow:
+        0 0 1px rgba(255, 255, 255, 0.9),
 }
 
 strong, b {
@@ -1838,4 +1835,5 @@ a:focus-visible,
         background: transparent !important;
     }
 }
+
 
