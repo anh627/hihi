@@ -327,7 +327,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     line-height: 1.3;
     color: var(--white);
-    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+    text-shadow: 6px 5px 50px #ffffff;
      margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
     -webkit-font-smoothing: antialiased;
@@ -341,8 +341,8 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow:
-        0 1 2px rgba(255, 255, 255, 0.9),
+    text-shadow: 6px 5px 40px #ffffff;
+        
    
 }
 
@@ -363,19 +363,14 @@ h6 { font-size: 1rem; font-weight: 600; }
 p {
     margin-bottom: 1.5rem;
     color: var(--white);
-    text-shadow:
-        0 0 1px rgba(255, 255, 255, 0.9),
+    text-shadow: 6px 5px 50px #ffffff;
+       
 }
 
 strong, b {
     color: var(--highlight);
     font-weight: 600;
-    text-shadow:  
-        /* bóng trắng lệch */
-        2px 2px 5px rgba(255, 255, 255, 0.25),
-        /* ánh sáng xung quanh chữ */
-        0 0 6px rgba(255, 255, 255, 0.3),
-        0 0 12px rgba(255, 255, 255, 0.2);
+    text-shadow: 6px 5px 50px #ffffff;
 }
 
 /* ============================================
@@ -946,14 +941,14 @@ strong, b {
     margin-bottom: 2rem;
     font-family: var(--font-heading);
     animation: fadeInUp 1s ease 0.3s both;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow:6px 5px 40px #ffffff;
 }
 
 #banner .content > p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--white);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    text-shadow:6px 5px 40px #ffffff;
     font-family: var(--font-primary);
     animation: fadeInUp 1s ease 0.5s both;
 }
@@ -1835,5 +1830,6 @@ a:focus-visible,
         background: transparent !important;
     }
 }
+
 
 
