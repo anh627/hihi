@@ -88,25 +88,31 @@
     --radius-2xl: 2rem;
     --radius-full: 9999px;
    
-    /* Shadows */
+    /* Enhanced Shadows - ĐẸP HƠN */
     --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    --shadow-colored: 0 10px 40px rgba(91, 95, 222, 0.2);
-    --shadow-glow: 0 0 30px rgba(91, 95, 222, 0.4);
+    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 20px 30px -5px rgba(0, 0, 0, 0.25);
+    --shadow-2xl: 0 25px 40px -8px rgba(0, 0, 0, 0.3);
+    --shadow-colored: 0 8px 25px rgba(91, 95, 222, 0.25);
+    --shadow-glow: 0 0 20px rgba(91, 95, 222, 0.5);
+    
+    /* Enhanced Text Shadows - SẮC NÉT HƠN */
+    --text-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --text-shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --text-shadow-lg: 0 3px 6px rgba(0, 0, 0, 0.35);
+    --text-shadow-glow: 0 0 15px rgba(255, 215, 0, 0.6);
    
-    /* Transitions */
-    --transition-fast: all 0.2s ease;
-    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Transitions - TỐI ƯU HƠN */
+    --transition-fast: all 0.15s ease;
+    --transition-base: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* ============================================
-   3. ANIMATIONS - GRADIENT MOVEMENT
+   3. ANIMATIONS - OPTIMIZED TIMING
    ============================================ */
 @keyframes gradientMove1 {
     0% {
@@ -234,9 +240,9 @@ body {
 }
 
 /* ============================================
-   5. ANIMATED GRADIENT BACKGROUND LAYERS
+   5. ANIMATED GRADIENT BACKGROUND LAYERS - ENHANCED
    ============================================ */
-body::before,
+/* Body gradient layers - REMOVED ::before */
 body::after {
     content: '';
     position: fixed;
@@ -247,48 +253,29 @@ body::after {
     z-index: var(--z-base);
     pointer-events: none;
     will-change: transform, opacity;
-}
-
-body::before {
-    background: radial-gradient(circle at 30% 40%, rgba(147, 51, 234, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 70% 60%, rgba(91, 95, 222, 0.35) 0%, transparent 60%);
-    animation: gradientMove1 20s ease-in-out infinite;
+    background: radial-gradient(circle at 60% 30%, rgba(236, 72, 153, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.45) 0%, transparent 55%);
+    animation: gradientMove2 15s ease-in-out infinite; /* GIẢM THỜI GIAN */
     filter: blur(60px);
 }
 
-body::after {
-    background: radial-gradient(circle at 60% 30%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.35) 0%, transparent 55%);
-    animation: gradientMove2 25s ease-in-out infinite;
-    filter: blur(80px);
-}
-
-/* Additional Gradient Layers */
-#main::before,
+/* Main gradient layer - REMOVED ::before, ENHANCED ::after */
 #main::after {
     content: '';
     position: fixed;
-    width: 120vw;
-    height: 120vh;
-    top: -10vh;
-    left: -10vw;
+    width: 130vw;
+    height: 130vh;
+    top: -15vh;
+    left: -15vw;
     z-index: var(--z-particles);
     pointer-events: none;
     will-change: transform, opacity;
-}
-
-#main::before {
-    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.25) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);
-    animation: gradientMove3 30s ease-in-out infinite;
-    filter: blur(90px);
-}
-
-#main::after {
-    background: radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.25) 0%, transparent 55%),
-                radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.3) 0%, transparent 60%);
-    animation: gradientMove4 22s ease-in-out infinite;
-    filter: blur(70px);
+    background: radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.35) 0%, transparent 55%),
+                radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.4) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+    animation: gradientMove4 12s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    filter: blur(50px);
+    mix-blend-mode: screen;
 }
 
 /* Prevent scroll when menu/modal is open */
@@ -320,15 +307,15 @@ img {
 }
 
 /* ============================================
-   6. TYPOGRAPHY
+   6. TYPOGRAPHY - ENHANCED SHADOWS
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.3;
     color: var(--white);
-    text-shadow: 6px 5px 90px #ffffff;
-     margin: 0 0 1rem 0;
+    text-shadow: var(--text-shadow-md);
+    margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -341,14 +328,13 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 6px 5px 90px #ffffff;
-        
-   
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
 }
 
 h2 {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 800;
+    text-shadow: var(--text-shadow-lg);
 }
 
 h3 {
@@ -363,14 +349,13 @@ h6 { font-size: 1rem; font-weight: 600; }
 p {
     margin-bottom: 1.5rem;
     color: var(--white);
-    text-shadow: 6px 5px 90px #ffffff;
-       
+    text-shadow: var(--text-shadow-sm);
 }
 
 strong, b {
     color: var(--highlight);
     font-weight: 600;
-    text-shadow: 6px 5px 90px #ffffff;
+    text-shadow: var(--text-shadow-md), var(--text-shadow-glow);
 }
 
 /* ============================================
@@ -392,7 +377,7 @@ strong, b {
     width: var(--sidebar-width);
     height: 100vh;
     background: var(--gradient-sidebar);
-    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.3), 
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.4), 
                 inset -1px 0 0 rgba(0, 255, 255, 0.1);
     overflow-y: auto;
     z-index: var(--z-sidebar);
@@ -412,7 +397,7 @@ strong, b {
         rgba(0, 255, 255, 0.03) 50%, 
         transparent 100%);
     pointer-events: none;
-    animation: pulse 4s ease-in-out infinite;
+    animation: pulse 3s ease-in-out infinite; /* GIẢM THỜI GIAN */
 }
 
 #sidebar .inner {
@@ -454,7 +439,7 @@ strong, b {
     outline: none;
     background: rgba(0, 255, 255, 0.12);
     border-color: rgba(0, 255, 255, 0.5);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
 }
 
 #search form::after {
@@ -492,7 +477,7 @@ strong, b {
     letter-spacing: 0.1em;
     margin: 0;
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
 }
 
 #menu > ul {
@@ -528,7 +513,7 @@ strong, b {
     color: #00ffff;
     padding-left: 1.5rem;
     border-color: rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
 }
 
 #menu .opener::after {
@@ -536,7 +521,7 @@ strong, b {
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     font-size: 0.75rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease; /* TỐI ƯU */
     color: rgba(0, 255, 255, 0.6);
 }
 
@@ -551,7 +536,7 @@ strong, b {
     margin: 0.5rem 0 0.5rem 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* TỐI ƯU */
 }
 
 #menu > ul > li.active > ul {
@@ -575,7 +560,7 @@ strong, b {
     left: 1rem;
     color: #00ffff;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease; /* TỐI ƯU */
 }
 
 #menu ul ul li a:hover {
@@ -603,7 +588,7 @@ strong, b {
     letter-spacing: 0.1em;
     margin: 0 0 1rem 0;
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
 }
 
 #sidebar section p {
@@ -635,7 +620,7 @@ strong, b {
     background: rgba(0, 255, 255, 0.15);
     transform: translateX(5px);
     border-color: rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
 }
 
 .contact li .icon {
@@ -692,8 +677,9 @@ strong, b {
 #sidebar::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, #00ffff 0%, #00aaff 100%);
 }
+
 /* ============================================
-   7. MAIN CONTENT - OPTIMIZED
+   7. MAIN CONTENT - OPTIMIZED WITH ANIMATION FOR ALL DEVICES
    ============================================ */
 #main {
     margin-left: var(--sidebar-width);
@@ -703,7 +689,7 @@ strong, b {
     position: relative;
     background: linear-gradient(88deg, #4251ce, #e73c7e, #23a6d5, #7a41ae);
     background-size: 400% 400%;
-    animation: gradientShift 25s ease infinite;
+    animation: gradientShift 15s ease infinite; /* GIẢM THỜI GIAN & HIỆU ỨNG CHO TẤT CẢ THIẾT BỊ */
     overflow: hidden;
     width: calc(100% - var(--sidebar-width));
     z-index: var(--z-base);
@@ -715,24 +701,12 @@ strong, b {
     100% { background-position: 0% 50%; }
 }
 
-#main::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.1);
-    pointer-events: none;
-    z-index: 1;
-}
-
 #main > * {
     position: relative;
     z-index: var(--z-content);
 }
 
-/* Floating Icons - FIXED Z-INDEX */
+/* Floating Icons - OPTIMIZED */
 .floating-icons {
     position: fixed;
     top: 0;
@@ -749,8 +723,8 @@ strong, b {
     font-size: 3rem;
     opacity: 0.25;
     color: rgba(255, 255, 255, 0.9);
-    animation: floatIcon 30s ease-in-out infinite;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    animation: floatIcon 20s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
     will-change: transform;
     transform: translateZ(0);
 }
@@ -766,11 +740,11 @@ strong, b {
     }
 }
 
-.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: 35s; }
-.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: 40s; }
-.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: 38s; }
-.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: 32s; }
-.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: 36s; }
+.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: 22s; }
+.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: 25s; }
+.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: 23s; }
+.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: 20s; }
+.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: 24s; }
 
 .floating-icon.math { color: #FFFFFF; }
 .floating-icon.science { color: #FFD700; }
@@ -778,7 +752,7 @@ strong, b {
 .floating-icon.engineering { color: #FFD700; }
 .floating-icon.creative { color: #FFFFFF; }
 
-/* Particles - FIXED Z-INDEX */
+/* Particles - OPTIMIZED */
 .particles {
     position: fixed;
     top: 0;
@@ -796,7 +770,7 @@ strong, b {
     background: white;
     border-radius: 50%;
     opacity: 0.6;
-    animation: particleFloat 25s linear infinite;
+    animation: particleFloat 18s linear infinite; /* GIẢM THỜI GIAN */
     will-change: transform;
     transform: translateZ(0);
 }
@@ -814,11 +788,11 @@ strong, b {
     }
 }
 
-.particle:nth-child(1) { left: 10%; animation-duration: 25s; animation-delay: 0s; }
-.particle:nth-child(2) { left: 30%; animation-duration: 28s; animation-delay: 5s; }
-.particle:nth-child(3) { left: 50%; animation-duration: 30s; animation-delay: 10s; }
-.particle:nth-child(4) { left: 70%; animation-duration: 27s; animation-delay: 15s; }
-.particle:nth-child(5) { left: 90%; animation-duration: 29s; animation-delay: 20s; }
+.particle:nth-child(1) { left: 10%; animation-duration: 18s; animation-delay: 0s; }
+.particle:nth-child(2) { left: 30%; animation-duration: 20s; animation-delay: 3s; }
+.particle:nth-child(3) { left: 50%; animation-duration: 22s; animation-delay: 6s; }
+.particle:nth-child(4) { left: 70%; animation-duration: 19s; animation-delay: 9s; }
+.particle:nth-child(5) { left: 90%; animation-duration: 21s; animation-delay: 12s; }
 
 /* Reduce animations on touch devices */
 @media (pointer: coarse) {
@@ -842,10 +816,10 @@ strong, b {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 5px;
+    height: 3px;
     background: var(--gradient-vibrant);
     border-radius: 2px;
-    animation: shimmer 5s ease-in-out infinite;
+    animation: shimmer 2s ease-in-out infinite; /* GIẢM THỜI GIAN */
 }
 
 @keyframes shimmer {
@@ -864,7 +838,7 @@ strong, b {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
 }
 
 /* Banner */
@@ -878,7 +852,7 @@ strong, b {
     background: rgba(30, 33, 57, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-2xl);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-xl);
     position: relative;
     overflow: hidden;
 }
@@ -891,7 +865,30 @@ strong, b {
     }
 }
 
+#banner::before,
+#banner::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite; /* GIẢM THỜI GIAN */
+}
 
+#banner::before {
+    top: -50%;
+    right: -10%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+}
+
+#banner::after {
+    bottom: -30%;
+    left: -10%;
+    width: 40%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(91, 95, 222, 0.1) 0%, transparent 70%);
+    animation-direction: reverse;
+}
 
 @keyframes float {
     0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
@@ -910,12 +907,12 @@ strong, b {
     margin-bottom: 1rem;
     font-family: var(--font-heading);
     font-weight: 900;
-    animation: titleGlow 3s ease-in-out infinite;
+    animation: titleGlow 2.5s ease-in-out infinite; /* GIẢM THỜI GIAN */
 }
 
 @keyframes titleGlow {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)); }
-    50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)); }
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)); }
+    50% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.9)); }
 }
 
 #banner .content header h1 strong {
@@ -924,7 +921,7 @@ strong, b {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
-    animation: colorShift 5s ease-in-out infinite;
+    animation: colorShift 4s ease-in-out infinite; /* GIẢM THỜI GIAN */
 }
 
 @keyframes colorShift {
@@ -940,17 +937,17 @@ strong, b {
     font-weight: 600;
     margin-bottom: 2rem;
     font-family: var(--font-heading);
-    animation: fadeInUp 1s ease 0.3s both;
-    text-shadow:6px 5px 40px #ffffff;
+    animation: fadeInUp 0.8s ease 0.2s both; /* GIẢM THỜI GIAN */
+    text-shadow: var(--text-shadow-md);
 }
 
 #banner .content > p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--white);
-    text-shadow:6px 5px 40px #ffffff;
+    text-shadow: var(--text-shadow-sm);
     font-family: var(--font-primary);
-    animation: fadeInUp 1s ease 0.5s both;
+    animation: fadeInUp 0.8s ease 0.4s both; /* GIẢM THỜI GIAN */
 }
 
 @keyframes fadeInUp {
@@ -969,8 +966,8 @@ strong, b {
     z-index: 2;
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-    animation: imageFloat 4s ease-in-out infinite;
+    box-shadow: var(--shadow-2xl);
+    animation: imageFloat 3s ease-in-out infinite; /* GIẢM THỜI GIAN */
 }
 
 @keyframes imageFloat {
@@ -982,7 +979,7 @@ strong, b {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease; /* TỐI ƯU */
 }
 
 #banner .image.object:hover img {
@@ -1002,7 +999,7 @@ section header.major h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
     font-family: var(--font-heading);
     font-weight: 800;
 }
@@ -1019,7 +1016,7 @@ section header.major h2 {
     background: rgba(30, 33, 57, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-xl);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
     transition: var(--transition-spring);
     position: relative;
     overflow: hidden;
@@ -1042,7 +1039,7 @@ section header.major h2 {
     height: 4px;
     background: var(--gradient-vibrant);
     transform: scaleX(0);
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease; /* TỐI ƯU */
 }
 
 .features article:hover::before {
@@ -1052,7 +1049,7 @@ section header.major h2 {
 .features article:hover {
     transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-xl);
 }
 
 .features article .icon {
@@ -1067,7 +1064,7 @@ section header.major h2 {
     color: var(--white);
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    animation: iconPulse 3s ease-in-out infinite;
+    animation: iconPulse 2.5s ease-in-out infinite; /* GIẢM THỜI GIAN */
 }
 
 @keyframes iconPulse {
@@ -1082,7 +1079,7 @@ section header.major h2 {
 }
 
 .features article:hover .icon {
-    animation: iconBounce 0.6s ease;
+    animation: iconBounce 0.5s ease; /* TỐI ƯU */
 }
 
 @keyframes iconBounce {
@@ -1097,7 +1094,7 @@ section header.major h2 {
 .features article:nth-child(3) .icon { background: var(--gradient-nature); }
 
 .features article:hover .icon i {
-    animation: iconRotate 0.8s ease;
+    animation: iconRotate 0.6s ease; /* TỐI ƯU */
 }
 
 @keyframes iconRotate {
@@ -1107,7 +1104,7 @@ section header.major h2 {
 
 .features article .content h3 {
     color: var(--white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: var(--text-shadow-md);
     margin-bottom: 1rem;
     font-size: 1.4rem;
     font-family: var(--font-heading);
@@ -1116,7 +1113,7 @@ section header.major h2 {
 
 .features article .content p {
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: var(--text-shadow-sm);
     line-height: 1.8;
     margin: 0;
     font-family: var(--font-primary);
@@ -1135,7 +1132,7 @@ section header.major h2 {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
     transition: var(--transition-spring);
     cursor: pointer;
 }
@@ -1151,7 +1148,7 @@ section header.major h2 {
 .posts article:hover {
     transform: translateY(-10px) scale(1.02);
     background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-xl);
 }
 
 .posts article .image {
@@ -1165,7 +1162,7 @@ section header.major h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease; /* TỐI ƯU */
 }
 
 .posts article:hover .image img {
@@ -1175,7 +1172,7 @@ section header.major h2 {
 .posts article h3 {
     padding: 1.5rem 1.5rem 0.5rem;
     color: var(--white);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: var(--text-shadow-md);
     font-size: 1.3rem;
     font-family: var(--font-heading);
     font-weight: 700;
@@ -1184,7 +1181,7 @@ section header.major h2 {
 .posts article p {
     padding: 0 1.5rem;
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: var(--text-shadow-sm);
     line-height: 1.7;
     font-family: var(--font-primary);
 }
@@ -1207,9 +1204,9 @@ section header.major h2 {
     font-family: var(--font-primary);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: var(--text-shadow-sm);
     transition: var(--transition-spring);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-md);
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -1225,7 +1222,7 @@ section header.major h2 {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
+    transition: width 0.5s ease, height 0.5s ease; /* TỐI ƯU */
 }
 
 .button:hover::before {
@@ -1237,7 +1234,7 @@ section header.major h2 {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    box-shadow: var(--shadow-lg);
     color: var(--white);
 }
 
@@ -1248,8 +1245,6 @@ ul.actions {
     padding: 0;
     margin: 0;
 }
-
-/* ============================================
   /* ============================================
    8. PHET SIMULATIONS - CARD LAYOUT
    ============================================ */
@@ -1830,6 +1825,7 @@ a:focus-visible,
         background: transparent !important;
     }
 }
+
 
 
 
