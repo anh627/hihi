@@ -36,9 +36,10 @@
     /* Animated Background Gradient */
     --gradient-animated-bg: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
    
-    /* Text Shadow cho màu vàng/gradient */
-    --text-shadow-white: 0 0 20px rgba(255, 255, 255, 0.5), 0 2px 4px rgba(255, 255, 255, 0.3);
-    --text-shadow-glow: 0 0 30px rgba(255, 215, 0, 0.6), 0 3px 6px rgba(255, 255, 255, 0.4);
+    /* Text Shadow for Yellow/Rainbow Text */
+    --text-shadow-white-soft: 0 0 10px rgba(255, 255, 255, 0.3), 
+                              0 0 20px rgba(255, 255, 255, 0.2),
+                              0 2px 4px rgba(0, 0, 0, 0.3);
    
     /* Neutrals */
     --white: #FFFFFF;
@@ -107,16 +108,6 @@
     --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    
-    /* Performance settings */
-    --enable-animations: 1;
-}
-
-/* Performance mode for low-end devices */
-@media (max-width: 768px) and (hover: none) {
-    :root {
-        --enable-animations: 0.5; /* Giảm 50% animation trên mobile */
-    }
 }
 
 /* ============================================
@@ -153,68 +144,6 @@
     100% {
         transform: translate3d(0, 0, 0) rotate(360deg) scale(1);
         opacity: 0.25;
-    }
-}
-
-@keyframes gradientMove3 {
-    0% {
-        transform: translate3d(0, 0, 0) rotate(45deg);
-        opacity: 0.35;
-    }
-    25% {
-        transform: translate3d(20%, -20%, 0) rotate(135deg);
-        opacity: 0.5;
-    }
-    75% {
-        transform: translate3d(-30%, 40%, 0) rotate(315deg);
-        opacity: 0.3;
-    }
-    100% {
-        transform: translate3d(0, 0, 0) rotate(405deg);
-        opacity: 0.35;
-    }
-}
-
-@keyframes gradientMove4 {
-    0% {
-        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-        opacity: 0.3;
-    }
-    40% {
-        transform: translate3d(25%, 35%, 0) scale(1.15) rotate(144deg);
-        opacity: 0.45;
-    }
-    80% {
-        transform: translate3d(-15%, -25%, 0) scale(0.9) rotate(288deg);
-        opacity: 0.35;
-    }
-    100% {
-        transform: translate3d(0, 0, 0) scale(1) rotate(360deg);
-        opacity: 0.3;
-    }
-}
-
-/* Animation cho main background - FIX cho PC */
-@keyframes gradientShift {
-    0% { 
-        background-position: 0% 50%;
-        transform: scale(1) rotate(0deg);
-    }
-    25% { 
-        background-position: 50% 100%;
-        transform: scale(1.01) rotate(0.5deg);
-    }
-    50% { 
-        background-position: 100% 50%;
-        transform: scale(1.02) rotate(0deg);
-    }
-    75% { 
-        background-position: 50% 0%;
-        transform: scale(1.01) rotate(-0.5deg);
-    }
-    100% { 
-        background-position: 0% 50%;
-        transform: scale(1) rotate(0deg);
     }
 }
 
@@ -272,10 +201,10 @@ body {
 }
 
 /* ============================================
-   5. ANIMATED GRADIENT BACKGROUND LAYERS - OPTIMIZED
+   5. OPTIMIZED ANIMATED GRADIENT BACKGROUND
    ============================================ */
-body::before,
-body::after {
+/* Giảm số lớp gradient và tối ưu animation */
+body::before {
     content: '';
     position: fixed;
     width: 150vw;
@@ -284,28 +213,16 @@ body::after {
     left: -25vw;
     z-index: var(--z-base);
     pointer-events: none;
-    will-change: transform, opacity;
-    transform: translate3d(0, 0, 0); /* Force GPU acceleration */
-    animation-play-state: running; /* Ensure animation runs */
-}
-
-body::before {
+    will-change: transform;
+    transform: translateZ(0);
     background: radial-gradient(circle at 30% 40%, rgba(147, 51, 234, 0.4) 0%, transparent 60%),
                 radial-gradient(circle at 70% 60%, rgba(91, 95, 222, 0.35) 0%, transparent 60%);
-    animation: gradientMove1 calc(20s * var(--enable-animations)) ease-in-out infinite;
+    animation: gradientMove1 20s ease-in-out infinite;
     filter: blur(60px);
 }
 
-body::after {
-    background: radial-gradient(circle at 60% 30%, rgba(236, 72, 153, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.35) 0%, transparent 55%);
-    animation: gradientMove2 calc(25s * var(--enable-animations)) ease-in-out infinite;
-    filter: blur(80px);
-}
-
-/* Additional Gradient Layers - OPTIMIZED */
-#main::before,
-#main::after {
+/* Chỉ giữ lại 1 lớp gradient phụ cho main */
+#main::before {
     content: '';
     position: fixed;
     width: 120vw;
@@ -314,22 +231,19 @@ body::after {
     left: -10vw;
     z-index: var(--z-particles);
     pointer-events: none;
-    will-change: transform, opacity;
-    transform: translate3d(0, 0, 0); /* Force GPU acceleration */
+    will-change: transform;
+    transform: translateZ(0);
+    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.25) 0%, transparent 60%);
+    animation: gradientMove2 25s ease-in-out infinite;
+    filter: blur(80px);
 }
 
-#main::before {
-    background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.25) 0%, transparent 60%),
-                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.2) 0%, transparent 50%);
-    animation: gradientMove3 calc(30s * var(--enable-animations)) ease-in-out infinite;
-    filter: blur(90px);
-}
-
-#main::after {
-    background: radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.25) 0%, transparent 55%),
-                radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.3) 0%, transparent 60%);
-    animation: gradientMove4 calc(22s * var(--enable-animations)) ease-in-out infinite;
-    filter: blur(70px);
+/* Tắt animation cho performance thấp */
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    #main::before {
+        animation: none;
+    }
 }
 
 /* Prevent scroll when menu/modal is open */
@@ -338,7 +252,7 @@ body.modal-open {
     overflow: hidden;
 }
 
-/* Hide menu toggle when modal is open - ENHANCED */
+/* Hide menu toggle when modal is open */
 body.modal-open .menu-toggle,
 body:has(.phet-modal.active) .menu-toggle {
     display: none !important;
@@ -361,7 +275,7 @@ img {
 }
 
 /* ============================================
-   6. TYPOGRAPHY - ENHANCED WITH WHITE SHADOW
+   6. TYPOGRAPHY WITH WHITE SHADOW
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
@@ -375,6 +289,7 @@ h1, h2, h3, h4, h5, h6 {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Gradient text với white shadow */
 h1 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 900;
@@ -382,8 +297,8 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: var(--text-shadow-glow); /* Thêm shadow trắng cho text gradient */
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    text-shadow: var(--text-shadow-white-soft);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
 }
 
 h2 {
@@ -406,11 +321,11 @@ p {
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-/* Text màu vàng/highlight với shadow trắng */
+/* Highlight text với white shadow */
 strong, b {
     color: var(--highlight);
     font-weight: 600;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.4);
+    text-shadow: var(--text-shadow-white-soft);
 }
 
 /* ============================================
@@ -452,7 +367,7 @@ strong, b {
         rgba(0, 255, 255, 0.03) 50%, 
         transparent 100%);
     pointer-events: none;
-    animation: pulse calc(4s * var(--enable-animations)) ease-in-out infinite;
+    animation: pulse 4s ease-in-out infinite;
 }
 
 #sidebar .inner {
@@ -532,7 +447,7 @@ strong, b {
     letter-spacing: 0.1em;
     margin: 0;
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 5px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
 #menu > ul {
@@ -569,7 +484,6 @@ strong, b {
     padding-left: 1.5rem;
     border-color: rgba(0, 255, 255, 0.3);
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 #menu .opener::after {
@@ -644,7 +558,7 @@ strong, b {
     letter-spacing: 0.1em;
     margin: 0 0 1rem 0;
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 5px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
 #sidebar section p {
@@ -735,7 +649,7 @@ strong, b {
 }
 
 /* ============================================
-   7. MAIN CONTENT - OPTIMIZED WITH ANIMATED BG
+   7. MAIN CONTENT - OPTIMIZED
    ============================================ */
 #main {
     margin-left: var(--sidebar-width);
@@ -745,12 +659,18 @@ strong, b {
     position: relative;
     background: linear-gradient(88deg, #4251ce, #e73c7e, #23a6d5, #7a41ae);
     background-size: 400% 400%;
-    animation: gradientShift calc(25s * var(--enable-animations)) ease infinite;
+    animation: gradientShift 25s ease infinite;
     overflow: hidden;
     width: calc(100% - var(--sidebar-width));
     z-index: var(--z-base);
-    transform: translate3d(0, 0, 0); /* Force GPU acceleration */
-    will-change: background-position, transform;
+    will-change: background-position;
+    transform: translateZ(0);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 #main > * {
@@ -775,10 +695,10 @@ strong, b {
     font-size: 3rem;
     opacity: 0.25;
     color: rgba(255, 255, 255, 0.9);
-    animation: floatIcon calc(30s * var(--enable-animations)) ease-in-out infinite;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+    animation: floatIcon 30s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     will-change: transform;
-    transform: translate3d(0, 0, 0);
+    transform: translateZ(0);
 }
 
 @keyframes floatIcon {
@@ -792,32 +712,32 @@ strong, b {
     }
 }
 
-.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: calc(35s * var(--enable-animations)); }
-.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: calc(40s * var(--enable-animations)); }
-.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: calc(38s * var(--enable-animations)); }
-.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: calc(32s * var(--enable-animations)); }
-.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: calc(36s * var(--enable-animations)); }
+.floating-icon:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; animation-duration: 35s; }
+.floating-icon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; animation-duration: 40s; }
+.floating-icon:nth-child(3) { top: 30%; left: 70%; animation-delay: -10s; animation-duration: 38s; }
+.floating-icon:nth-child(4) { top: 80%; left: 20%; animation-delay: -15s; animation-duration: 32s; }
+.floating-icon:nth-child(5) { top: 50%; left: 10%; animation-delay: -20s; animation-duration: 36s; }
 
-/* Màu icon với white shadow */
+/* Colored icons với white shadow */
 .floating-icon.math { 
     color: #FFFFFF; 
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+    text-shadow: var(--text-shadow-white-soft);
 }
 .floating-icon.science { 
     color: #FFD700; 
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+    text-shadow: var(--text-shadow-white-soft);
 }
 .floating-icon.tech { 
     color: #FFFFFF; 
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+    text-shadow: var(--text-shadow-white-soft);
 }
 .floating-icon.engineering { 
     color: #FFD700; 
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+    text-shadow: var(--text-shadow-white-soft);
 }
 .floating-icon.creative { 
     color: #FFFFFF; 
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+    text-shadow: var(--text-shadow-white-soft);
 }
 
 /* Particles - OPTIMIZED */
@@ -838,10 +758,10 @@ strong, b {
     background: white;
     border-radius: 50%;
     opacity: 0.6;
-    animation: particleFloat calc(25s * var(--enable-animations)) linear infinite;
+    animation: particleFloat 25s linear infinite;
     will-change: transform;
-    transform: translate3d(0, 0, 0);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: translateZ(0);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
 @keyframes particleFloat {
@@ -857,27 +777,19 @@ strong, b {
     }
 }
 
-.particle:nth-child(1) { left: 10%; animation-duration: calc(25s * var(--enable-animations)); animation-delay: 0s; }
-.particle:nth-child(2) { left: 30%; animation-duration: calc(28s * var(--enable-animations)); animation-delay: 5s; }
-.particle:nth-child(3) { left: 50%; animation-duration: calc(30s * var(--enable-animations)); animation-delay: 10s; }
-.particle:nth-child(4) { left: 70%; animation-duration: calc(27s * var(--enable-animations)); animation-delay: 15s; }
-.particle:nth-child(5) { left: 90%; animation-duration: calc(29s * var(--enable-animations)); animation-delay: 20s; }
+.particle:nth-child(1) { left: 10%; animation-duration: 25s; animation-delay: 0s; }
+.particle:nth-child(2) { left: 30%; animation-duration: 28s; animation-delay: 5s; }
+.particle:nth-child(3) { left: 50%; animation-duration: 30s; animation-delay: 10s; }
+.particle:nth-child(4) { left: 70%; animation-duration: 27s; animation-delay: 15s; }
+.particle:nth-child(5) { left: 90%; animation-duration: 29s; animation-delay: 20s; }
 
-/* Performance optimization for mobile/touch devices */
-@media (pointer: coarse) {
+/* Performance mode - giảm animation cho máy yếu */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
     .floating-icon:nth-child(n+4) { display: none; }
     .particle:nth-child(n+4) { display: none; }
     
-    /* Giảm độ phức tạp animation trên mobile */
     #main {
-        animation-duration: 40s;
-    }
-    
-    body::before,
-    body::after,
-    #main::before,
-    #main::after {
-        animation-duration: 40s;
+        animation-duration: 40s; /* Chậm hơn để mượt hơn */
     }
 }
 
@@ -900,7 +812,7 @@ strong, b {
     height: 3px;
     background: var(--gradient-vibrant);
     border-radius: 2px;
-    animation: shimmer calc(3s * var(--enable-animations)) ease-in-out infinite;
+    animation: shimmer 3s ease-in-out infinite;
 }
 
 @keyframes shimmer {
@@ -919,7 +831,8 @@ strong, b {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+    text-shadow: var(--text-shadow-white-soft);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
 }
 
 /* Banner */
@@ -951,7 +864,7 @@ strong, b {
     content: '';
     position: absolute;
     border-radius: 50%;
-    animation: float calc(20s * var(--enable-animations)) ease-in-out infinite;
+    animation: float 20s ease-in-out infinite;
 }
 
 #banner::before {
@@ -971,6 +884,12 @@ strong, b {
     animation-direction: reverse;
 }
 
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    33% { transform: translateY(-30px) rotate(120deg) scale(1.1); }
+    66% { transform: translateY(20px) rotate(240deg) scale(0.9); }
+}
+
 #banner .content {
     position: relative;
     z-index: 2;
@@ -982,15 +901,15 @@ strong, b {
     margin-bottom: 1rem;
     font-family: var(--font-heading);
     font-weight: 900;
-    animation: titleGlow calc(3s * var(--enable-animations)) ease-in-out infinite;
+    animation: titleGlow 3s ease-in-out infinite;
 }
 
 @keyframes titleGlow {
     0%, 100% { 
-        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.4)); 
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
     }
     50% { 
-        filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)); 
+        filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8));
     }
 }
 
@@ -1000,7 +919,8 @@ strong, b {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
-    animation: colorShift calc(5s * var(--enable-animations)) ease-in-out infinite;
+    animation: colorShift 5s ease-in-out infinite;
+    text-shadow: var(--text-shadow-white-soft);
 }
 
 @keyframes colorShift {
@@ -1017,7 +937,7 @@ strong, b {
     margin-bottom: 2rem;
     font-family: var(--font-heading);
     animation: fadeInUp 1s ease 0.3s both;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.3);
+    text-shadow: var(--text-shadow-white-soft);
 }
 
 #banner .content > p {
@@ -1046,12 +966,12 @@ strong, b {
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-    animation: imageFloat calc(4s * var(--enable-animations)) ease-in-out infinite;
+    animation: imageFloat 4s ease-in-out infinite;
 }
 
 @keyframes imageFloat {
-    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-    50% { transform: translate3d(0, -10px, 0) rotate(1deg); }
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
 }
 
 #banner .image.object img {
@@ -1078,7 +998,8 @@ section header.major h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+    text-shadow: var(--text-shadow-white-soft);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
     font-family: var(--font-heading);
     font-weight: 800;
 }
@@ -1143,7 +1064,7 @@ section header.major h2 {
     color: var(--white);
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    animation: iconPulse calc(3s * var(--enable-animations)) ease-in-out infinite;
+    animation: iconPulse 3s ease-in-out infinite;
 }
 
 @keyframes iconPulse {
@@ -1415,7 +1336,7 @@ ul.actions {
 }
 
 /* ============================================
-   9. FULLSCREEN MODAL - SIMPLIFIED
+   9. FULLSCREEN MODAL
    ============================================ */
 .phet-modal {
     display: none;
@@ -1518,13 +1439,12 @@ ul.actions {
 }
 
 /* ============================================
-   10. RESPONSIVE DESIGN - OPTIMIZED
+   10. RESPONSIVE DESIGN
    ============================================ */
 @media screen and (max-width: 1024px) {
     :root {
         --sidebar-width: 260px;
         --content-padding: 1.5rem;
-        --enable-animations: 0.7; /* Giảm animation trên tablet */
     }
    
     #main {
@@ -1582,8 +1502,16 @@ ul.actions {
 }
 
 @media screen and (max-width: 768px) {
-    :root {
-        --enable-animations: 0.5; /* Giảm 50% animation trên mobile */
+    /* Tắt animation trên mobile để tối ưu performance */
+    #main {
+        animation: none;
+        background: linear-gradient(88deg, #4251ce, #e73c7e, #23a6d5, #7a41ae);
+    }
+    
+    body::before,
+    #main::before {
+        animation: none;
+        opacity: 0.3;
     }
     
     #sidebar {
@@ -1751,10 +1679,6 @@ ul.actions {
 }
 
 @media screen and (max-width: 480px) {
-    :root {
-        --enable-animations: 0.3; /* Giảm 70% animation trên mobile nhỏ */
-    }
-    
     #sidebar {
         width: 260px;
     }
@@ -1836,10 +1760,6 @@ ul.actions {
    11. PERFORMANCE OPTIMIZATIONS
    ============================================ */
 @media (prefers-reduced-motion: reduce) {
-    :root {
-        --enable-animations: 0.01; /* Tắt gần như hoàn toàn animation */
-    }
-    
     * {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
@@ -1847,17 +1767,17 @@ ul.actions {
     }
 }
 
-/* GPU Acceleration for critical animations */
-.floating-icon,
-.particle,
-#main,
-body::before,
-body::after,
-#main::before,
-#main::after {
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
+/* Performance mode cho máy yếu */
+@media (max-width: 1024px), (max-height: 768px) {
+    body::after,
+    #main::after {
+        display: none;
+    }
+    
+    .floating-icon,
+    .particle {
+        animation-play-state: paused;
+    }
 }
 
 /* ============================================
