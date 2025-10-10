@@ -88,23 +88,17 @@
     --radius-2xl: 2rem;
     --radius-full: 9999px;
    
-    /* Enhanced Shadows - ĐẸP HƠN */
+    /* Enhanced Shadows */
     --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 10px 20px -3px rgba(0, 0, 0, 0.2);
-    --shadow-xl: 0 20px 30px -5px rgba(0, 0, 0, 0.25);
-    --shadow-2xl: 0 25px 40px -8px rgba(0, 0, 0, 0.3);
-    --shadow-colored: 0 8px 25px rgba(91, 95, 222, 0.25);
-    --shadow-glow: 0 0 20px rgba(91, 95, 222, 0.5);
-    
-    /* Enhanced Text Shadows - SẮC NÉT HƠN */
-    --text-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
-    --text-shadow-md: 0 2px 4px rgba(0, 0, 0, 0.3);
-    --text-shadow-lg: 0 3px 6px rgba(0, 0, 0, 0.35);
-    --text-shadow-glow: 0 0 15px rgba(255, 215, 0, 0.6);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15), 0 6px 10px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.2), 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 30px 60px rgba(0, 0, 0, 0.3);
+    --shadow-colored: 0 15px 35px rgba(91, 95, 222, 0.25);
+    --shadow-glow: 0 0 40px rgba(91, 95, 222, 0.5);
    
-    /* Transitions - TỐI ƯU HƠN */
+    /* Optimized Transitions */
     --transition-fast: all 0.15s ease;
     --transition-base: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -112,77 +106,77 @@
 }
 
 /* ============================================
-   3. ANIMATIONS - OPTIMIZED TIMING
+   3. ANIMATIONS - OPTIMIZED GRADIENT MOVEMENT
    ============================================ */
 @keyframes gradientMove1 {
     0% {
         transform: translate(0, 0) rotate(0deg);
-        opacity: 0.3;
+        opacity: 0.4;
     }
     33% {
         transform: translate(30%, 30%) rotate(120deg);
-        opacity: 0.5;
+        opacity: 0.6;
     }
     66% {
         transform: translate(-20%, 50%) rotate(240deg);
-        opacity: 0.4;
+        opacity: 0.5;
     }
     100% {
         transform: translate(0, 0) rotate(360deg);
-        opacity: 0.3;
+        opacity: 0.4;
     }
 }
 
 @keyframes gradientMove2 {
     0% {
         transform: translate(0, 0) rotate(0deg) scale(1);
-        opacity: 0.25;
+        opacity: 0.35;
     }
     50% {
         transform: translate(-40%, -30%) rotate(180deg) scale(1.2);
-        opacity: 0.4;
+        opacity: 0.5;
     }
     100% {
         transform: translate(0, 0) rotate(360deg) scale(1);
-        opacity: 0.25;
+        opacity: 0.35;
     }
 }
 
 @keyframes gradientMove3 {
     0% {
         transform: translate(0, 0) rotate(45deg);
-        opacity: 0.35;
+        opacity: 0.45;
     }
     25% {
         transform: translate(20%, -20%) rotate(135deg);
-        opacity: 0.5;
+        opacity: 0.6;
     }
     75% {
         transform: translate(-30%, 40%) rotate(315deg);
-        opacity: 0.3;
+        opacity: 0.4;
     }
     100% {
         transform: translate(0, 0) rotate(405deg);
-        opacity: 0.35;
+        opacity: 0.45;
     }
 }
 
 @keyframes gradientMove4 {
     0% {
         transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 0.3;
+        opacity: 0.4;
     }
     40% {
         transform: translate(25%, 35%) scale(1.15) rotate(144deg);
-        opacity: 0.45;
+        opacity: 0.55;
     }
     80% {
         transform: translate(-15%, -25%) scale(0.9) rotate(288deg);
-        opacity: 0.35;
+        opacity: 0.45;
     }
     100% {
         transform: translate(0, 0) scale(1) rotate(360deg);
-        opacity: 0.3;
+        opacity: 0.4;
     }
 }
 
@@ -242,7 +236,8 @@ body {
 /* ============================================
    5. ANIMATED GRADIENT BACKGROUND LAYERS - ENHANCED
    ============================================ */
-/* Body gradient layers - REMOVED ::before */
+/* Removed body::before as requested - it was too faint */
+
 body::after {
     content: '';
     position: fixed;
@@ -255,27 +250,38 @@ body::after {
     will-change: transform, opacity;
     background: radial-gradient(circle at 60% 30%, rgba(236, 72, 153, 0.4) 0%, transparent 50%),
                 radial-gradient(circle at 40% 70%, rgba(59, 130, 246, 0.45) 0%, transparent 55%);
-    animation: gradientMove2 15s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    animation: gradientMove2 15s ease-in-out infinite; /* Reduced from 25s */
     filter: blur(60px);
 }
 
-/* Main gradient layer - REMOVED ::before, ENHANCED ::after */
+/* Enhanced Additional Gradient Layers */
+#main::before,
 #main::after {
     content: '';
     position: fixed;
-    width: 130vw;
-    height: 130vh;
-    top: -15vh;
-    left: -15vw;
+    width: 120vw;
+    height: 120vh;
+    top: -10vh;
+    left: -10vw;
     z-index: var(--z-particles);
     pointer-events: none;
     will-change: transform, opacity;
-    background: radial-gradient(circle at 20% 80%, rgba(239, 68, 68, 0.35) 0%, transparent 55%),
+}
+
+#main::before {
+    background: radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.35) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.3) 0%, transparent 50%);
+    animation: gradientMove3 18s ease-in-out infinite; /* Reduced from 30s */
+    filter: blur(70px);
+}
+
+/* Enhanced #main::after for more vibrant effect */
+#main::after {
+    background: radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.35) 0%, transparent 55%),
                 radial-gradient(circle at 90% 50%, rgba(14, 165, 233, 0.4) 0%, transparent 60%),
-                radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
-    animation: gradientMove4 12s ease-in-out infinite; /* GIẢM THỜI GIAN */
+                radial-gradient(circle at 50% 10%, rgba(16, 185, 129, 0.3) 0%, transparent 50%);
+    animation: gradientMove4 12s ease-in-out infinite; /* Reduced from 22s */
     filter: blur(50px);
-    mix-blend-mode: screen;
 }
 
 /* Prevent scroll when menu/modal is open */
@@ -307,14 +313,15 @@ img {
 }
 
 /* ============================================
-   6. TYPOGRAPHY - ENHANCED SHADOWS
+   6. TYPOGRAPHY - ENHANCED TEXT SHADOWS
    ============================================ */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.3;
     color: var(--white);
-    text-shadow: var(--text-shadow-md);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5),
+                 0 0 24px rgba(255, 255, 255, 0.1);
     margin: 0 0 1rem 0;
     letter-spacing: -0.02em;
     -webkit-font-smoothing: antialiased;
@@ -328,13 +335,13 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 8px rgba(255, 215, 0, 0.3));
+    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.3))
+            drop-shadow(0 1px 3px rgba(0, 0, 0, 0.5));
 }
 
 h2 {
     font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 800;
-    text-shadow: var(--text-shadow-lg);
 }
 
 h3 {
@@ -349,13 +356,14 @@ h6 { font-size: 1rem; font-weight: 600; }
 p {
     margin-bottom: 1.5rem;
     color: var(--white);
-    text-shadow: var(--text-shadow-sm);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 strong, b {
     color: var(--highlight);
     font-weight: 600;
-    text-shadow: var(--text-shadow-md), var(--text-shadow-glow);
+    text-shadow: 1px 1px 6px rgba(255, 215, 0, 0.5),
+                 0 0 12px rgba(255, 215, 0, 0.3);
 }
 
 /* ============================================
@@ -377,7 +385,7 @@ strong, b {
     width: var(--sidebar-width);
     height: 100vh;
     background: var(--gradient-sidebar);
-    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.4), 
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.3), 
                 inset -1px 0 0 rgba(0, 255, 255, 0.1);
     overflow-y: auto;
     z-index: var(--z-sidebar);
@@ -397,7 +405,7 @@ strong, b {
         rgba(0, 255, 255, 0.03) 50%, 
         transparent 100%);
     pointer-events: none;
-    animation: pulse 3s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    animation: pulse 3s ease-in-out infinite; /* Reduced from 4s */
 }
 
 #sidebar .inner {
@@ -439,7 +447,7 @@ strong, b {
     outline: none;
     background: rgba(0, 255, 255, 0.12);
     border-color: rgba(0, 255, 255, 0.5);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
 }
 
 #search form::after {
@@ -477,7 +485,7 @@ strong, b {
     letter-spacing: 0.1em;
     margin: 0;
     font-weight: 600;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
 #menu > ul {
@@ -513,7 +521,7 @@ strong, b {
     color: #00ffff;
     padding-left: 1.5rem;
     border-color: rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
 }
 
 #menu .opener::after {
@@ -521,7 +529,7 @@ strong, b {
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
     font-size: 0.75rem;
-    transition: transform 0.25s ease; /* TỐI ƯU */
+    transition: transform 0.3s ease;
     color: rgba(0, 255, 255, 0.6);
 }
 
@@ -536,7 +544,7 @@ strong, b {
     margin: 0.5rem 0 0.5rem 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* TỐI ƯU */
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Reduced from 0.5s */
 }
 
 #menu > ul > li.active > ul {
@@ -560,7 +568,7 @@ strong, b {
     left: 1rem;
     color: #00ffff;
     opacity: 0;
-    transition: opacity 0.25s ease; /* TỐI ƯU */
+    transition: opacity 0.3s ease;
 }
 
 #menu ul ul li a:hover {
@@ -588,7 +596,7 @@ strong, b {
     letter-spacing: 0.1em;
     margin: 0 0 1rem 0;
     font-weight: 600;
-    text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
 #sidebar section p {
@@ -620,7 +628,7 @@ strong, b {
     background: rgba(0, 255, 255, 0.15);
     transform: translateX(5px);
     border-color: rgba(0, 255, 255, 0.3);
-    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
 }
 
 .contact li .icon {
@@ -679,7 +687,7 @@ strong, b {
 }
 
 /* ============================================
-   7. MAIN CONTENT - OPTIMIZED WITH ANIMATION FOR ALL DEVICES
+   7. MAIN CONTENT - OPTIMIZED WITH ANIMATED BG
    ============================================ */
 #main {
     margin-left: var(--sidebar-width);
@@ -689,7 +697,7 @@ strong, b {
     position: relative;
     background: linear-gradient(88deg, #4251ce, #e73c7e, #23a6d5, #7a41ae);
     background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite; /* GIẢM THỜI GIAN & HIỆU ỨNG CHO TẤT CẢ THIẾT BỊ */
+    animation: gradientShift 15s ease infinite; /* Reduced from 25s */
     overflow: hidden;
     width: calc(100% - var(--sidebar-width));
     z-index: var(--z-base);
@@ -706,7 +714,7 @@ strong, b {
     z-index: var(--z-content);
 }
 
-/* Floating Icons - OPTIMIZED */
+/* Floating Icons - FIXED Z-INDEX */
 .floating-icons {
     position: fixed;
     top: 0;
@@ -723,8 +731,8 @@ strong, b {
     font-size: 3rem;
     opacity: 0.25;
     color: rgba(255, 255, 255, 0.9);
-    animation: floatIcon 20s ease-in-out infinite; /* GIẢM THỜI GIAN */
-    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+    animation: floatIcon 20s ease-in-out infinite; /* Reduced from 30s */
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
     will-change: transform;
     transform: translateZ(0);
 }
@@ -752,7 +760,7 @@ strong, b {
 .floating-icon.engineering { color: #FFD700; }
 .floating-icon.creative { color: #FFFFFF; }
 
-/* Particles - OPTIMIZED */
+/* Particles - FIXED Z-INDEX */
 .particles {
     position: fixed;
     top: 0;
@@ -770,7 +778,7 @@ strong, b {
     background: white;
     border-radius: 50%;
     opacity: 0.6;
-    animation: particleFloat 18s linear infinite; /* GIẢM THỜI GIAN */
+    animation: particleFloat 18s linear infinite; /* Reduced from 25s */
     will-change: transform;
     transform: translateZ(0);
 }
@@ -789,10 +797,10 @@ strong, b {
 }
 
 .particle:nth-child(1) { left: 10%; animation-duration: 18s; animation-delay: 0s; }
-.particle:nth-child(2) { left: 30%; animation-duration: 20s; animation-delay: 3s; }
-.particle:nth-child(3) { left: 50%; animation-duration: 22s; animation-delay: 6s; }
-.particle:nth-child(4) { left: 70%; animation-duration: 19s; animation-delay: 9s; }
-.particle:nth-child(5) { left: 90%; animation-duration: 21s; animation-delay: 12s; }
+.particle:nth-child(2) { left: 30%; animation-duration: 20s; animation-delay: 5s; }
+.particle:nth-child(3) { left: 50%; animation-duration: 22s; animation-delay: 10s; }
+.particle:nth-child(4) { left: 70%; animation-duration: 19s; animation-delay: 15s; }
+.particle:nth-child(5) { left: 90%; animation-duration: 21s; animation-delay: 20s; }
 
 /* Reduce animations on touch devices */
 @media (pointer: coarse) {
@@ -819,7 +827,7 @@ strong, b {
     height: 3px;
     background: var(--gradient-vibrant);
     border-radius: 2px;
-    animation: shimmer 2s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    animation: shimmer 2s ease-in-out infinite; /* Reduced from 3s */
 }
 
 @keyframes shimmer {
@@ -838,7 +846,8 @@ strong, b {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.4))
+            drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
 }
 
 /* Banner */
@@ -852,7 +861,7 @@ strong, b {
     background: rgba(30, 33, 57, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
 }
@@ -870,7 +879,7 @@ strong, b {
     content: '';
     position: absolute;
     border-radius: 50%;
-    animation: float 15s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    animation: float 15s ease-in-out infinite; /* Reduced from 20s */
 }
 
 #banner::before {
@@ -907,12 +916,12 @@ strong, b {
     margin-bottom: 1rem;
     font-family: var(--font-heading);
     font-weight: 900;
-    animation: titleGlow 2.5s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    animation: titleGlow 2.5s ease-in-out infinite; /* Reduced from 3s */
 }
 
 @keyframes titleGlow {
-    0%, 100% { filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6)); }
-    50% { filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.9)); }
+    0%, 100% { filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.6)); }
+    50% { filter: drop-shadow(0 0 50px rgba(255, 215, 0, 0.9)); }
 }
 
 #banner .content header h1 strong {
@@ -921,7 +930,7 @@ strong, b {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     display: inline-block;
-    animation: colorShift 4s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    animation: colorShift 4s ease-in-out infinite; /* Reduced from 5s */
 }
 
 @keyframes colorShift {
@@ -937,17 +946,17 @@ strong, b {
     font-weight: 600;
     margin-bottom: 2rem;
     font-family: var(--font-heading);
-    animation: fadeInUp 0.8s ease 0.2s both; /* GIẢM THỜI GIAN */
-    text-shadow: var(--text-shadow-md);
+    animation: fadeInUp 0.8s ease 0.3s both; /* Reduced from 1s */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 #banner .content > p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: var(--white);
-    text-shadow: var(--text-shadow-sm);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
     font-family: var(--font-primary);
-    animation: fadeInUp 0.8s ease 0.4s both; /* GIẢM THỜI GIAN */
+    animation: fadeInUp 0.8s ease 0.5s both; /* Reduced from 1s */
 }
 
 @keyframes fadeInUp {
@@ -966,8 +975,8 @@ strong, b {
     z-index: 2;
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: var(--shadow-2xl);
-    animation: imageFloat 3s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    animation: imageFloat 3s ease-in-out infinite; /* Reduced from 4s */
 }
 
 @keyframes imageFloat {
@@ -979,7 +988,7 @@ strong, b {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease; /* TỐI ƯU */
+    transition: transform 0.4s ease; /* Reduced from 0.5s */
 }
 
 #banner .image.object:hover img {
@@ -999,7 +1008,8 @@ section header.major h2 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0 4px 10px rgba(255, 215, 0, 0.4))
+            drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
     font-family: var(--font-heading);
     font-weight: 800;
 }
@@ -1016,7 +1026,7 @@ section header.major h2 {
     background: rgba(30, 33, 57, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition-spring);
     position: relative;
     overflow: hidden;
@@ -1039,7 +1049,7 @@ section header.major h2 {
     height: 4px;
     background: var(--gradient-vibrant);
     transform: scaleX(0);
-    transition: transform 0.25s ease; /* TỐI ƯU */
+    transition: transform 0.3s ease;
 }
 
 .features article:hover::before {
@@ -1049,7 +1059,7 @@ section header.major h2 {
 .features article:hover {
     transform: translateY(-10px);
     background: rgba(255, 255, 255, 0.2);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .features article .icon {
@@ -1064,7 +1074,7 @@ section header.major h2 {
     color: var(--white);
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
-    animation: iconPulse 2.5s ease-in-out infinite; /* GIẢM THỜI GIAN */
+    animation: iconPulse 2.5s ease-in-out infinite; /* Reduced from 3s */
 }
 
 @keyframes iconPulse {
@@ -1079,7 +1089,7 @@ section header.major h2 {
 }
 
 .features article:hover .icon {
-    animation: iconBounce 0.5s ease; /* TỐI ƯU */
+    animation: iconBounce 0.5s ease; /* Reduced from 0.6s */
 }
 
 @keyframes iconBounce {
@@ -1094,7 +1104,7 @@ section header.major h2 {
 .features article:nth-child(3) .icon { background: var(--gradient-nature); }
 
 .features article:hover .icon i {
-    animation: iconRotate 0.6s ease; /* TỐI ƯU */
+    animation: iconRotate 0.6s ease; /* Reduced from 0.8s */
 }
 
 @keyframes iconRotate {
@@ -1104,7 +1114,7 @@ section header.major h2 {
 
 .features article .content h3 {
     color: var(--white);
-    text-shadow: var(--text-shadow-md);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     margin-bottom: 1rem;
     font-size: 1.4rem;
     font-family: var(--font-heading);
@@ -1113,7 +1123,7 @@ section header.major h2 {
 
 .features article .content p {
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: var(--text-shadow-sm);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     line-height: 1.8;
     margin: 0;
     font-family: var(--font-primary);
@@ -1132,7 +1142,7 @@ section header.major h2 {
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: var(--transition-spring);
     cursor: pointer;
 }
@@ -1148,7 +1158,7 @@ section header.major h2 {
 .posts article:hover {
     transform: translateY(-10px) scale(1.02);
     background: rgba(255, 255, 255, 0.2);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .posts article .image {
@@ -1162,7 +1172,7 @@ section header.major h2 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease; /* TỐI ƯU */
+    transition: transform 0.4s ease; /* Reduced from 0.5s */
 }
 
 .posts article:hover .image img {
@@ -1172,7 +1182,7 @@ section header.major h2 {
 .posts article h3 {
     padding: 1.5rem 1.5rem 0.5rem;
     color: var(--white);
-    text-shadow: var(--text-shadow-md);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     font-size: 1.3rem;
     font-family: var(--font-heading);
     font-weight: 700;
@@ -1181,7 +1191,7 @@ section header.major h2 {
 .posts article p {
     padding: 0 1.5rem;
     color: rgba(255, 255, 255, 0.9);
-    text-shadow: var(--text-shadow-sm);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     line-height: 1.7;
     font-family: var(--font-primary);
 }
@@ -1204,9 +1214,9 @@ section header.major h2 {
     font-family: var(--font-primary);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    text-shadow: var(--text-shadow-sm);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     transition: var(--transition-spring);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -1222,7 +1232,7 @@ section header.major h2 {
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.3);
     transform: translate(-50%, -50%);
-    transition: width 0.5s ease, height 0.5s ease; /* TỐI ƯU */
+    transition: width 0.5s ease, height 0.5s ease; /* Reduced from 0.6s */
 }
 
 .button:hover::before {
@@ -1234,7 +1244,7 @@ section header.major h2 {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
     transform: translateY(-3px);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     color: var(--white);
 }
 
@@ -1245,7 +1255,8 @@ ul.actions {
     padding: 0;
     margin: 0;
 }
-  /* ============================================
+
+/* ============================================
    8. PHET SIMULATIONS - CARD LAYOUT
    ============================================ */
 
@@ -1292,7 +1303,7 @@ ul.actions {
     width: 100%;
     height: 180px;
     object-fit: cover; /* Đảm bảo ảnh không bị méo */
-    transition: transform 0.4s ease;
+    transition: transform 0.3s ease; /* Reduced from 0.4s */
 }
 
 .sim-card:hover img {
@@ -1306,6 +1317,7 @@ ul.actions {
     font-family: var(--font-heading);
     margin: 0;
     padding: 1rem 1.5rem 0.5rem; /* Canh lề cho tiêu đề */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Mô tả thẻ (đã bỏ padding-left) */
@@ -1316,6 +1328,7 @@ ul.actions {
     margin: 0;
     padding: 0 1.5rem 1.5rem;
     flex-grow: 1; /* Giúp các thẻ có cùng chiều cao */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
 }
 
 /* Nút mở rộng toàn màn hình */
@@ -1344,7 +1357,6 @@ ul.actions {
     background: var(--primary);
 }
 
-
 /* ============================================
    9. FULLSCREEN MODAL - SIMPLIFIED
    ============================================ */
@@ -1359,7 +1371,7 @@ ul.actions {
     backdrop-filter: blur(8px);
     z-index: var(--z-modal);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease; /* Reduced from 0.3s */
     align-items: center;
     justify-content: center;
 }
@@ -1379,7 +1391,7 @@ ul.actions {
     border-radius: var(--radius-lg);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
     transform: scale(0.8);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Reduced from 0.3s */
     display: flex;
     flex-direction: column;
     padding: 1rem;
@@ -1451,6 +1463,7 @@ ul.actions {
         width: calc(100% - var(--sidebar-width));
     }
 }
+
 /* ============================================
    10. RESPONSIVE DESIGN
    ============================================ */
@@ -1825,8 +1838,3 @@ a:focus-visible,
         background: transparent !important;
     }
 }
-
-
-
-
-
