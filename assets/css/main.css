@@ -775,17 +775,6 @@ strong, b {
     position: relative;
 }
 
-#header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-vibrant);
-    border-radius: 2px;
-    animation: shimmer 3s ease-in-out infinite;
-}
 
 @keyframes shimmer {
     0%, 100% { opacity: 0.6; transform: scaleX(0.8); }
@@ -830,56 +819,30 @@ strong, b {
     }
 }
 
-#banner::before,
-#banner::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    animation: float 20s ease-in-out infinite;
-}
-
-#banner::before {
-    top: -50%;
-    right: -10%;
-    width: 60%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-}
-
-#banner::after {
-    bottom: -30%;
-    left: -10%;
-    width: 40%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(91, 95, 222, 0.1) 0%, transparent 70%);
-    animation-direction: reverse;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    33% { transform: translateY(-30px) rotate(120deg) scale(1.1); }
-    66% { transform: translateY(20px) rotate(240deg) scale(0.9); }
-}
-
 #banner .content {
     position: relative;
     z-index: 2;
 }
 
+/* 🌟 Tiêu đề có hiệu ứng phát sáng trắng */
 #banner .content header h1 {
     font-size: 3.5rem;
     line-height: 1.2;
     margin-bottom: 1rem;
     font-family: var(--font-heading);
     font-weight: 900;
+    color: #fff;
     animation: titleGlow 3s ease-in-out infinite;
+
+    /* Hiệu ứng phát sáng trắng nhiều lớp */
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.9),
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(255, 255, 255, 0.6),
+        0 0 40px rgba(255, 255, 255, 0.4);
 }
 
-@keyframes titleGlow {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)); }
-    50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)); }
-}
-
+/* 🌈 Chữ bên trong strong có hiệu ứng gradient động */
 #banner .content header h1 strong {
     background: var(--gradient-sunset);
     -webkit-background-clip: text;
@@ -889,6 +852,23 @@ strong, b {
     animation: colorShift 5s ease-in-out infinite;
 }
 
+/* ✨ Hiệu ứng phát sáng động cho chữ h1 */
+@keyframes titleGlow {
+    0%, 100% {
+        text-shadow:
+            0 0 8px rgba(255, 255, 255, 0.9),
+            0 0 16px rgba(255, 255, 255, 0.8),
+            0 0 32px rgba(255, 255, 255, 0.7);
+    }
+    50% {
+        text-shadow:
+            0 0 12px rgba(255, 240, 200, 0.9),
+            0 0 24px rgba(255, 215, 150, 0.8),
+            0 0 48px rgba(255, 200, 100, 0.6);
+    }
+}
+
+/* 🎨 Hiệu ứng chuyển màu gradient cho chữ strong */
 @keyframes colorShift {
     0%, 100% { filter: hue-rotate(0deg) brightness(1.2); }
     25% { filter: hue-rotate(45deg) brightness(1.3); }
@@ -896,6 +876,7 @@ strong, b {
     75% { filter: hue-rotate(-45deg) brightness(1.3); }
 }
 
+/* Đoạn mô tả dưới tiêu đề */
 #banner .content header p {
     font-size: 1.3rem;
     color: var(--highlight);
@@ -906,6 +887,7 @@ strong, b {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Đoạn mô tả phụ */
 #banner .content > p {
     font-size: 1.1rem;
     line-height: 1.8;
@@ -915,17 +897,13 @@ strong, b {
     animation: fadeInUp 1s ease 0.5s both;
 }
 
+/* Hiệu ứng fade in */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
+/* Hình ảnh trong banner */
 #banner .image.object {
     position: relative;
     z-index: 2;
@@ -1792,4 +1770,5 @@ a:focus-visible,
         background: transparent !important;
     }
 }
+
 
